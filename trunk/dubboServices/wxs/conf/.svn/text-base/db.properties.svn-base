@@ -1,0 +1,31 @@
+# Database config
+db.driverClass=org.postgresql.Driver
+#DB default user and password, this will be used as all the database
+db.default.user=postgres
+db.default.password=1
+db.plt.baseUrl=jdbc\:postgresql\://192.168.6.201\:25432
+db.plt.name=wxs
+db.plt.user=postgres
+db.plt.password=emintest
+#Configuratin for the pool
+db.poolClass=com.mchange.v2.c3p0.ComboPooledDataSource
+db.minPoolSize=5
+db.maxPoolSize=30
+db.initialPoolSize=10
+db.maxIdleTime=1
+db.acquireIncrement=5
+db.maxStatements=0
+db.idleConnectionTestPeriod=1
+db.acquireRetryAttempts=30
+db.breakAfterAcquireFailure=true
+db.testConnectionOnCheckout=false
+# Hibernate config
+hibernate.dialect=org.hibernate.dialect.PostgreSQLDialect
+hibernate.show_sql=false
+hibernate.format_sql=false
+use_sql_comments=true
+hibernate.generate_statistics=false
+hibernate.connection.release_mode=AFTER_TRANSACTION
+hibernate.jdbc.batch_size=1000
+hibernate.cache.provider_class=org.hibernate.cache.EhCacheProvider
+hibernate.hbm2ddl.auto=update

@@ -1,0 +1,8 @@
+{
+	"trySwitch": "1  试饮活动开关",
+    "startTime": 1479744000000,
+	"endTime": 1493654115000,
+    "pricePerTime": "0.01 试饮价格",
+    "userTotalTimes": "2 试饮次数",
+    "volume": "25  试饮量"
+}

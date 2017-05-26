@@ -1,0 +1,500 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1,maximum-scale=1,user-scalable=no">
+		<meta name="apple-mobile-web-app-capable" content="yes">
+		<meta name="apple-mobile-web-app-status-bar-style" content="black">
+		<title></title>
+    		<!--<link rel="stylesheet" href="css/swiper.min.css">
+			<link rel="stylesheet" href="css/main.css" />
+			<link rel="stylesheet" href="css/index.css" />
+			<link rel="stylesheet" href="css/progressBar.css" />
+			<link rel="stylesheet" href="css/animate.css" />-->
+			<link rel="stylesheet" href="css/all.css" />
+	</head>
+	<body>
+		<div class="bg">
+			<div class="wrap">
+				<div class="ad">
+					<section class="swiper-container " id="adLst" style="height:100%;width:100%;">
+				        <div class="swiper-wrapper" id="scrollAds">
+				        	<ul>
+				        		<li><img src="img/ad-default.png" /></li>
+				        	</ul>
+				        	 <div class="adCover"></div>
+				        </div>
+				        <div class="swiper-pagination" id="lunbopages"></div>
+				       
+				    </section>
+				</div>
+				<div class="content">
+					<!--
+                    	作者：DANICA
+                    	时间：2017-04-20
+                    	描述：首页模块
+                    	
+                    	时间：2017-5-12
+                    	作者：Winnie
+                    	描述：取消首页进度条
+                    -->
+					<section class="main index" id="index-moudle">
+						<div class="left">
+							<div class="index-qrcode">
+								<i class="qrcode"></i>
+								<div>更多好礼尽在其中</div>
+								<div>关注有礼</div>
+							</div>
+							<div class="index-wechat">
+								<i class="wechat"></i>
+								<div>微信支付</div>
+							</div>
+						</div>
+						<div class="center">
+							<div class="index-enter">
+								<div class="left index-buy">
+									<i class="buy" onclick="showWinLst()"></i>
+									<div>购酒</div>
+								</div>
+								<div class="right index-service">
+									<i class="service" onclick="showKeybord(0,'outWin()')" ></i>
+									<div>打酒</div>
+								</div>
+							</div>
+						</div>
+						<div class="right index-info">
+							<div  onclick="toSetUpMoudle()">
+								<span class="oper-btn"><i class="set-up"></i>设置</span></div>
+							<div class="ab-bot">
+								<div>
+									<span class="oper-btn" onclick="waiterLogin()"><i class="waiter"></i>服务员</span></div>
+								<div>联系电话：400-667-9191</div>
+							</div>
+						</div>
+					</section>
+					<!--
+                    	作者：DANICA
+                    	时间：2017-04-20
+                    	描述：酒品列表
+                    -->
+					<section class="main hide" id="win-lst-moudle">
+						<div class="ab-page-title">
+							<span></span>
+							<i class="close" onclick="backToIndex()"></i>
+						</div>
+					
+							<div class="win-lst-wrap" id="winLst">
+					           
+							</div>
+					</section>
+					<!--
+                    	作者：DANICA
+                    	时间：2017-04-20
+                    	描述：酒品详情，添加购买
+                    -->
+					<section class="main win-detail hide" id="win-detail-moudle">
+						<div class="ab-page-title">
+							<span></span>
+							<i class="close" onclick="toPage('win-lst-moudle')"></i>
+						</div>
+						<div class="info">
+							<!--<i class=" win-detail">
+								<img src="img/win-detail-default.png" />
+							</i>
+							<div class="ln50">
+								<span class="f22">五粮液国宾</span>
+								<span class="f22 m-color">￥22</span>
+								<span class="visitor">门市价：￥36</span>
+								<span>已卖出：<span class="m-color">36斤</span></span>
+							</div>
+							<div class="ln30">
+								<span>香型：浓香型</span>
+								<span>酒精度：3度</span>
+								<span>产地：贵州省陵水市</span>
+							</div>-->
+						</div>
+						<div class="buy-form">
+							<div class="ln30">请选择购酒数量</div>
+							<div class="ln50 win-count-area">
+								<div class="left"><span class="oper-btn" onclick="setWinCount(2)">2两</span></div>
+								<div class="left"><span class="oper-btn" onclick="setWinCount(5)">5两</span></div>
+								<div class="right"><span class="oper-btn" onclick="setWinCount(10)">10两</span></div>
+							</div>
+							<div class="ln50">
+								<icon class="left m-bg" onclick="subWinCount()">-</icon>
+								<div class="left input" id="win-buy-count" win-count="2">2两</div>
+								<icon class="right m-bg" onclick="plusWinCount()">+</icon>
+							</div>
+							<div id = 'win-status'>
+								<!--<div class="btn g-bg ln50" onclick="openSettlementPopup(0,false)" >结算</div>
+								<div class="title ln30">品尝</div>
+								<div class="btn red-bg ln50" onclick="openSettlementPopup(1,true)">先尝后买</div>-->
+							</div>
+						</div>
+					</section>
+					<!--
+                    	作者：offline
+                    	时间：2017-04-20
+                    	描述：扫码收银台
+                    -->
+					<section class="pop-up-bg hide" id="scanCounter-popUp">
+						<div class="pu-wrap pay-form">
+							<div class="pu-bar">
+								<span><!--标题--></span>
+								<i class="close" onclick="cancelPay()"></i>
+							</div>
+							<div class="pu-content" >
+								<section class="scan-counter" id="pay-code-info">
+									<div class="left scan-info" style="position:relative;border-right: 1px solid rgb(69,69,69);">
+										<!--<i class="scan-qrcode"></i>-->
+										<div class="pay-code" onclick="afterPay()">
+											<div class="loader-inner ball-spin-fade-loader">
+									          <div></div>
+									          <div></div>
+									          <div></div>
+									          <div></div>
+									          <div></div>
+									          <div></div>
+									          <div></div>
+									          <div></div>
+									        </div>
+										</div>
+										<div class="f22 blue-color" id="pay-tip" style="cursor: pointer;">请用微信支付<span id="payCountDown">...</span>秒</div>
+										<div class="f22 red-color"><span class="pay-money">...</span>元</div>
+									</div>
+									<div class="right counter-detail" id="pay-confirm-info">
+										<!--<div class="bot-line">
+											<div class="f22">窖藏1998</div>
+											<div class="ln50"><span style="float: left;">53度</span><span style="float: right;">酱香型</span></div>
+											<div class="f22" style="text-align: right;border-bottom: 2px solid rgb(169,198,255);">￥24元/1两</div>
+											<div class="f22 red-color" style="text-align: right;">实付款：...元</div>
+										</div>-->
+									</div>
+								</section>
+							</div>
+							<i class="pu-tail"></i>
+						</div>
+					</section>
+					<!--
+	                	作者：DANICA
+	                	时间：2017-04-20
+	                	描述：弹出数字键盘
+	                -->
+					<div class="pop-up-bg hide" id="keybord-pop-up">
+						<section class="keybord-wrap">
+							<div class="close-oper red-bg"><i class="close"></i></div>
+							<div style="width:260px;height:290px;margin: 55px auto;">
+								<div class="input" id="keybord-input"  ontouchstart="getPosition()">
+									<span id='textBox' default="请输入6位取酒码" >请输入6位取酒码</span>
+								</div>
+								<div >
+									<dl class="key left" style="width: 180px;">
+										<dd>7</dd>
+										<dd>8</dd>
+										<dd>9</dd>
+										<dd>4</dd>
+										<dd>5</dd>
+										<dd>6</dd>
+										<dd>1</dd>
+										<dd>2</dd>
+										<dd>3</dd>
+										<dd>0</dd>
+									</dl>
+									<dl class="oper right">
+										<dd class="delete">删除</dd>
+										<dd class="clear">清空</dd>
+										<dd class="red-bg" id="keybord-confirm" onclick="takeWinServ()">出酒</dd>
+									</dl>
+								</div>
+							</div>
+							<div class="loader" id='loader_animate'>
+							    <div class="loader-inner ball-scale">
+							    </div>
+							</div>
+							<span id="stick"></span>
+						</section>
+					</div>
+					<!--
+                    	作者：DANICA
+                    	时间：2017-04-20
+                    	描述：出酒信息
+                    -->
+					<section class="main service-result hide" id="service-result-moudle">
+						<div class="result-loading hide" id="service-loading" onclick="completeService()">
+							<i class="outLoading"></i>正在出酒...</span>
+						</div>
+						<div class="result-loading" id="service-success" onclick="backToIndex()">
+							<i class="outSuccess"></i>出酒成功</span>
+						</div>
+					</section>
+					<!--
+                    	作者：DANICA
+                    	时间：2017-04-20
+                    	描述：服务员登录
+                    	
+                    	时间：2017-05-12
+                    	作者：Winnie
+                    	描述：取消登录按钮 手机号通过正则判断后直接登录
+                    -->
+					<section class="main waiter-login hide" id="waiter-login-moudle">
+						<div class="ab-page-title">
+							<span></span>
+							<i class="close" onclick="backToIndex()"></i>
+						</div>
+						<div class="wl-content">
+							<div class="left scan-login">
+								<i class="login-qrcode"></i>
+								<div class="ln50">微信扫码登陆</div>
+							</div>
+							<div class="right input-login">
+								<span class="f22 red-color">手机号登陆</span>
+								<div class="input login-input f22" onclick="showKeybord(1,'inputWaiterLoginName()')" id="waiterLoginName">请输入手机号码</div>
+								<div class="alert-msg hide">手机号码错误，请重新输入！</div>
+									
+								<!--<div class="btn f22 red-bg" onclick="showServiceList()">登陆</div>-->
+							</div>
+						</div>
+				</section>
+				
+				<!--
+                	作者：DANICA
+                	时间：2017-04-20
+                	描述：设置
+                -->
+				<section class="main set-up-info hide" id="set-up-moudle">
+						<div class="ab-page-title">
+							<span>设置</span>
+							<i class="close" onclick="backToIndex()"></i>
+						</div>
+						<dl>
+							<dd>
+								<span class="f22">亮度</span>
+								<div class="scale_panel">
+									<div class="scale" id="bar_light">
+										<div></div>
+										<span id="btn_light"><div class="markValue" id="title_light">0%<div class="trible"></div></div></span>
+									</div>
+								</div>
+							</dd>
+							<dd>
+								<span class="f22">声音</span>
+								<div class="scale_panel">
+									<div class="scale" id="bar_voice">
+										<div></div>
+										<span id="btn_voice"><div class="markValue" id="title_voice">0%<div class="trible"></div></div></span>
+									</div>
+								</div>
+							</dd>
+						</dl>
+				</section>
+				<!--
+                	作者：DANICA
+                	时间：2017-04-20
+                	描述：服务员代打酒列表
+                -->
+				<section class="main service-lst hide" id="service-lst-moudle">
+						<div class="ab-page-title flex flex-pack-justify">
+							<span>代打酒列表</span>
+							<i class="close" onclick="backToIndex()"></i>
+						</div>
+						<div class="service-lst-table">
+							<dl>
+								<dt>序号</dt>
+								<dt>酒品名称</dt>
+								<dt>酒量</dt>
+								<dt>备注</dt>
+								<dt>操作</dt>
+							</dl>
+							<div id="service-data-lst">
+								
+								<!--<dl class="flex">
+									<dd>1</dd>
+									<dd>习酒特曲</dd>
+									<dd>8两</dd>
+									<dd>6号桌</dd>
+									<dd><div class="btn red-bg">打酒</div></dd>
+								</dl>-->
+								
+								
+							</div>
+							<div class="page-oper">
+								<div class="left"><span class="oper-btn" id="service-lst-pre-btn"><i class="pre"></i>上一页</span></div>
+								<div class="right"><span class="oper-btn" id="service-lst-next-btn">下一页<i class="next"></i></span></div>
+							</div>
+							<div class="put-code" onclick='putCode()' phone='0'>请输入打酒码</div>
+						</div>
+						
+				</section>
+				
+				<section class="main error hide" id="error-moudle">
+					<div class="error-tip" onclick="backToIndex()">
+						<div>酒柜故障，请联系工作人员</div>
+						<div><i class="telephone"></i><span id="telephone">028-4568-1245</span></div>
+					</div>
+				</section>
+				<!--提示框-->
+				<section class="pop-up-bg tips hide" id="alert-form">
+						<div class="pu-wrap pay-form">
+							<div class="pu-bar">
+								<span>温馨提示</span>
+								<i class="close" onclick="hideAlert()"></i>
+							</div>
+							<div class="alert-content" style="font-size: 20px;">
+							</div>
+							<i class="pu-tail"></i>
+						</div>
+				</section>
+				<section class="pop-up-bg tips hide" id="loading-wait">
+						<div class="pu-wrap pay-form">
+							<div class="pu-bar">
+								<span>正在加载...</span>
+							</div>
+							<div class="loader-inner ball-spin-fade-loader">
+						          <div></div>
+						          <div></div>
+						          <div></div>
+						          <div></div>
+						          <div></div>
+						          <div></div>
+						          <div></div>
+						          <div></div>
+						     </div>
+							<i class="pu-tail"></i>
+						</div>
+				</section>
+				<div id='alert-bar'>网络连接断开</div>
+				</div>
+			</div>
+		</div>
+	</body>
+	<!--<script type="text/javascript" src="js/swiper.min.js" ></script>-->
+	<script type="text/javascript" src="js/jquery-2.1.1.min.js" ></script>
+	<script type="text/javascript" src="js/jquery.qrcode.js"></script>
+	<script type="text/javascript" src="js/utf.js"></script>
+	<script type="text/javascript" src="js/fastclick.js"></script>
+	<script type="text/javascript" src="js/async.min.js" ></script>
+	<script type="text/javascript" src="js/progressBar.js" charset="utf-8"></script>
+	<script type="text/javascript" src="js/keybord.js" charset="utf-8"></script>
+	<script type="text/javascript" src="js/alertform.js" charset="utf-8"></script>
+	<script type="text/javascript" src="js/lunbo.js" charset="utf-8"></script>
+	<script type="text/javascript" src="js/mui.min.js" charset="utf-8"></script>
+	<script type="text/javascript" src="js/lazyimg.js" charset="utf-8"></script>
+	<script type="text/javascript" src="js/down.js" charset="utf-8"></script>
+	
+	
+	<script type="text/javascript" src="js/plugs/master.js"></script>
+	<script type="text/javascript" src="js/plugs/devices.js"></script>
+	<script type="text/javascript" src="js/plugs/pluginCabinet.js"></script>
+	<script type="text/javascript" src="js/plugs/pluginOrder.js"></script>
+	<script type="text/javascript" src="js/plugs/pluginWaiter.js"></script>
+	<script type="text/javascript" src="js/plugs/pluginCom.js"></script>
+	<script type="text/javascript" src="js/plugs/adv.js"></script>
+	<script type="text/javascript" src="js/update.js"></script>
+	
+	<script type="text/javascript" src="js/moudle/error.js" charset="utf-8"></script>
+	<script type="text/javascript" src="js/moudle/dataLoading.js" charset="utf-8"></script>
+	<script type="text/javascript" src="js/moudle/servlet.js" charset="utf-8"></script>
+	<script type="text/javascript" src="js/winSwiper.js" charset="utf-8"></script>
+	
+	<script src="js/mui.min.js"></script>
+	<script>
+		$(function() {
+		    FastClick.attach(document.body);
+		});
+		mui.init({
+			statusBarBackground: '#00f7f7f7'
+		});
+		
+		mui.plusReady(function() {
+			
+			plus.navigator.setLogs(true);
+			//关闭splash界面
+			plus.navigator.closeSplashscreen();
+			//设备全屏
+			plus.navigator.setFullscreen(true);
+			plus.com.createJob(function CommonCb(type,param){
+				if(type == 0){ //网络状态
+					var net = JSON.parse(param);
+					if(net.connect){
+						$('#alert-bar').animate({
+							marginRight:-135
+						},1000)
+					}else{
+						$('#alert-bar').animate({
+							marginRight:0
+						},1000)
+					}
+				}else if(type == 1){//升级状态
+					
+					var json = JSON.parse(param);
+				 	console.log("index 接收到安装请求：网络地址:"  + json.url + "  安装地址:" + json.path);
+					installWgt(json.url,json.path);
+//					installWgt(param);
+				}
+				
+			});
+			init();
+			cacheImg();
+		});
+		var payInterval = null;
+		//全局配置酒水列表
+		var globalWinLst = [];
+
+		/******
+		 * 初始化
+		 */
+		function init(){
+			/****
+			 * 初始化屏幕大小 16*9
+			 */
+			var bw = plus.screen.resolutionWidth;
+			var bh = plus.screen.resolutionHeight;
+			parseInt(bw/16*9)>bh?bw=parseInt(bh/9*16):bh=parseInt(bw/16*9);
+			var obj = document.getElementsByClassName("wrap");
+  			obj[0].style.width= bw+"px";
+  			obj[0].style.height= bh+"px";
+			controlInit();
+			loadAds();
+		}
+		
+		/**********
+		 * 控件初始化
+		 */
+		function controlInit(){
+			//初始化提示信息 显示加载中
+			var operEl = document.getElementById("service-loading");
+			if(operEl.className.indexOf("hide")>=0){
+				operEl.setAttribute("class",operEl.className.replace("hide",""));
+			}
+			//隐藏出酒成功
+			operEl = document.getElementById("service-success");
+			if(operEl.className.indexOf("hide")<0){
+				operEl.setAttribute("class",operEl.className+" hide");
+			}
+		}
+		
+		/******
+		 * 打酒
+		 */
+		function serviceWinOut(){
+			loadServiceResult()
+		}
+		/*
+		 * 缓存图片
+		 * */
+		function cacheImg(container) {
+//			var getImgs = function(cb) {
+//				var imgs = document.querySelectorAll("img");
+//				alert('待下载的图片'+imgs);
+//				imgs = mui.slice.call(imgs);
+//				imgs.forEach(function(item, index, array) {
+//					/*item.setAttribute("data-src", "http://pic41.nipic.com/20140518/18521768_133448822000_2.jpg")*/
+//				});
+//				cb && cb();
+//			}
+			Lazyimg.lazyLoad(container);
+		}
+		
+	</script>
+</html>
+ 

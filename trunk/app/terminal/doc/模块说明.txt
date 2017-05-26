@@ -1,0 +1,24 @@
+
+包名：io.dcloud
+5+Runtime SDK必须加载包文件
+
+包名：laiebei.terminal
+common:公共模块
+	----utils  工具类
+	----cache  缓存
+adm:广告模块
+trade:交易模块
+	---- wine
+application:应用加载模块
+dbm:本地数据库模块
+	----domain  数据库实体
+	----dao     自动生成数据库操作
+	----service 对接其他模块接口
+exceptions:异常类
+mainten:运维
+	----- logs     日志记录
+	----- control  控制
+	----- info     信息
+skm:网络通信模块
+plug:插件模块  对接H5接口
+wm:出酒模块

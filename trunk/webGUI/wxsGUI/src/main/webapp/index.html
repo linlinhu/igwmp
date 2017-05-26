@@ -1,0 +1,203 @@
+
+<!DOCTYPE HTML>
+
+<html>
+<head>
+<meta http-equiv="X-UA-Compatible" content="IE=EmulateIE8"/> 
+<title>后台管理</title>
+<link rel='icon' href='img/icon.ico' type='image/x-ico' /> 
+<link type="text/css" charset="utf-8" href="ext-3.0.3/resources/css/ext-all.css" rel="stylesheet"/>
+<link type="text/css" charset="utf-8" href="ext-3.0.3/multiselect.css" rel="stylesheet"/>
+<link type="text/css" charset="utf-8" href="ext-3.0.3/ColumnHeaderGroup.css" rel="stylesheet"/>
+<link type="text/css" charset="utf-8" href="ext-3.0.3/desktop/css/desktop.css" rel="stylesheet"/>
+<link type="text/css" charset="utf-8" href="resource/css/ewm.css" rel="stylesheet"/> 
+<link type="text/css" charset="utf-8" href="resource/css/phone.css" rel="stylesheet"/> 
+<link type="text/css" charset="utf-8" href="ext-3.0.3/ux/treegrid/treegrid.css" rel="stylesheet"/>
+<link type="text/css" charset="utf-8" href="js/uploadPanel/UploadPanel.css" rel="stylesheet"/>
+<script type="text/javascript">
+</script>
+<script src="ext-3.0.3/adapter/ext/ext-base.js" type="text/javascript" charset="utf-8"></script>
+<script src="ext-3.0.3/adapter/ext/ext-basex.js" type="text/javascript" charset="utf-8"></script>
+<script src="ext-3.0.3/ext-all.js" type="text/javascript" charset="utf-8"></script>
+<script src="ext-3.0.3/ColumnHeaderGroup.js" type="text/javascript" charset="utf-8"></script>
+<script src="ext-3.0.3/ux/treegrid/TreeGrid.js" type="text/javascript" charset="utf-8"></script>
+<script src="ext-3.0.3/ux/treegrid/TreeGridColumnResizer.js" type="text/javascript" charset="utf-8"></script>
+<script src="ext-3.0.3/ux/treegrid/TreeGridColumns.js" type="text/javascript" charset="utf-8"></script>
+<script src="ext-3.0.3/ux/treegrid/TreeGridLoader.js" type="text/javascript" charset="utf-8"></script>
+<script src="ext-3.0.3/ux/treegrid/TreeGridNodeUI.js" type="text/javascript" charset="utf-8"></script>
+<script src="ext-3.0.3/ux/treegrid/TreeGridSorter.js" type="text/javascript" charset="utf-8"></script>
+<link type="text/css" href="ext-3.0.3/ux/treegrideditor/treegrideditor.css" rel="stylesheet" />
+<script type="text/javascript" src="ext-3.0.3/ux/treegrideditor/TreeGridEditor.js"></script>
+<script type="text/javascript" src="ext-3.0.3/ux/treegrideditor/TreeGridEditorEventModel.js"></script>
+<script type="text/javascript" src="ext-3.0.3/ux/treegrideditor/TreeGridEditorNode.js"></script>
+<script type="text/javascript" src="ext-3.0.3/ux/treegrideditor/TreeGridEditorNodeUI.js"></script>
+<script type="text/javascript" src="ext-3.0.3/ux/treegrideditor/TreeGridEditorNodeReader.js"></script>
+<script type="text/javascript" src="ext-3.0.3/ux/treegrideditor/TreeGridEditorNodeWriter.js"></script>
+<script type="text/javascript" src="ext-3.0.3/ux/treegrideditor/TreeGridEditorLoader.js"></script>
+<script type="text/javascript" src="ext-3.0.3/ux/treegrideditor/TreeGridEditorDragZone.js"></script>
+<script type="text/javascript" src="ext-3.0.3/ux/treegrideditor/TreeGridEditorSelectionModel.js"></script>
+<script type="text/javascript" src="ext-3.0.3/ux/treegrideditor/locale/tge-lang-zh_CN.js"></script>
+<script type="text/javascript" src="ext-3.0.3/ux/treegrideditor/plugins/TreeNodeChecked.js"></script>
+<script type="text/javascript" src="js/uploadPanel/uploadPanel.js"></script>
+<script type="text/javascript" src="js/uploadPanel/swfupload.js"></script>
+<script src="ext-3.0.3/PagingMemoryProxy.js" type="text/javascript" charset="utf-8"></script>
+<script src="ext-3.0.3/ItemSelector.js" type="text/javascript" charset="utf-8"></script>
+<script src="ext-3.0.3/ext-lang-zh_CN.js" type="text/javascript" charset="utf-8"></script>
+<script src="ext-3.0.3/uxvismode.js" type="text/javascript" charset="utf-8"></script>
+<script type="text/javascript" src="echarts/echarts.js"></script>
+<script type="text/javascript" src="DatePicker/WdatePicker.js"></script>
+
+<script type="text/javascript" src="ext-3.0.3/desktop/js/StartMenu.js"></script>
+<script type="text/javascript" src="ext-3.0.3/desktop/js/TaskBar.js"></script>
+<script type="text/javascript" src="ext-3.0.3/desktop/js/Desktop.js"></script>
+<script type="text/javascript" src="ext-3.0.3/desktop/js/App.js"></script>
+<script type="text/javascript" src="ext-3.0.3/desktop/js/Module.js"></script>
+
+<script type="text/javascript" src="ext-3.0.3/desktop/js/messageWindow.js"></script>
+<script type="text/javascript" src="ext-3.0.3/desktop/sample.js"></script>
+<script type="text/javascript" src="ext-3.0.3/utils.js"></script>
+<script type="text/javascript" src="modules/wxartical.js"></script>
+<script type="text/javascript" src="modules/wcconf.js"></script>
+<script type="text/javascript" src="modules/sml-test.js"></script>
+<script type="text/javascript" src="modules/wcen.js"></script>
+<script type="text/javascript" src="modules/wxartical.js"></script>
+
+<script type="text/javascript" src="modules/product.js"></script>
+<script type="text/javascript" src="modules/wcewm.js"></script>
+<script type="text/javascript" src="modules/wcpp.js"></script>
+<script type="text/javascript" src="modules/contract.js"></script>
+<script type="text/javascript" src="modules/operator.js"></script>
+<script type="text/javascript" src="modules/operconf.js"></script>
+<script type="text/javascript" src="modules/divide.js"></script>
+<script charset="utf-8" src="http://map.qq.com/api/js?v=2.exp"></script>
+<script type="text/javascript">
+/*var basePath = "${basePath}"; 
+var modules = ${codes};
+modules = modules.split(",");
+//modules.push("AZ")
+*/
+var modules = ["PERSON","ORGM","PERM","WXUSER","WXCONF","WXMENU","WXARTICAL","WXMR","WXER","WXWP","WCCONF","WCEN","WCEWM","WCPP","PRODUCT"];
+</script>
+<style type="text/css">
+.rowdisable{
+background-color: red;
+color:#fff;
+}   
+.x-date-picker{
+   width:175px;
+}  
+.x-grid-empty{text-align:center;font-size:14px;color:#333;}
+.t-red{color:#d41111;}
+</style>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>Insert title here</title>
+</head>
+<body >
+<div id="x-desktop">
+    <dl id="x-shortcuts" class="x-shortcuts">
+    <dt id="PERSON-win-shortcut">
+       <a href="#" style='font-size: 12px;'> 
+       <img src="ext-3.0.3/desktop/images/48_48/PERSON.png"/><br>
+       	用户管理 </a>
+  	</dt>
+  	<dt id="ORGM-win-shortcut">
+       <a href="#" style='font-size: 12px;'> 
+       <img src="ext-3.0.3/desktop/images/48_48/ORGM.png"/><br>
+       		 组织管理</a>
+  	</dt>
+  	<dt id="PRODUCT-win-shortcut">
+       <a href="#" style='font-size: 12px;'> 
+       <img src="ext-3.0.3/desktop/images/48_48/ORGM.png"/><br>
+       		产品管理</a>
+  	</dt>
+  	
+  	<dt id="PERM-win-shortcut">
+       <a href="#" style='font-size: 12px;'> 
+       <img src="ext-3.0.3/desktop/images/48_48/PERM.png"/><br>
+       		 权限管理</a>
+  	</dt>
+  	<dt id="WXUSER-win-shortcut">
+       <a href="#" style='font-size: 12px;'> 
+       <img src="ext-3.0.3/desktop/images/48_48/WXUSER.png"/><br>
+       		 WXUSER</a>
+  	</dt>
+    <dt id="WXCONF-win-shortcut">
+       <a href="#" style='font-size: 12px;'> 
+       <img src="ext-3.0.3/desktop/images/48_48/WXCONF.png"/><br>
+       	微信公众号管理 </a>
+  	</dt>
+  	<dt id="WXMENU-win-shortcut">
+       <a href="#" style='font-size: 12px;'> 
+       <img src="ext-3.0.3/desktop/images/48_48/WXMENU.png"/><br>
+       	自定义菜单 </a>
+  	</dt>
+  	<dt id="WXARTICAL-win-shortcut">
+       <a href="#" style='font-size: 12px;'> 
+       <img src="ext-3.0.3/desktop/images/48_48/WXARTICAL.png"/><br>
+       		 图文库</a>
+  	</dt>
+  	<dt id="WXMR-win-shortcut">
+       <a href="#" style='font-size: 12px;'> 
+       <img src="ext-3.0.3/desktop/images/48_48/WXMR.png"/><br>
+       		 关键字回复</a>
+  	</dt>
+  	<dt id="WXER-win-shortcut">
+       <a href="#" style='font-size: 12px;'> 
+       <img src="ext-3.0.3/desktop/images/48_48/WXER.png"/><br>
+       		 事件回复</a>
+  	</dt>
+  	
+  	<dt id="WXWP-win-shortcut">
+       <a href="#" style='font-size: 12px;'> 
+       <img src="ext-3.0.3/desktop/images/48_48/WXWP.png"/><br>
+       		 微文章</a>
+  	</dt>
+  	<dt id="WCCONF-win-shortcut">
+       <a href="#" style='font-size: 12px;'>
+       <img src="ext-3.0.3/desktop/images/48_48/WCCONF.png"/><br>
+       		 设备管理</a>
+  	</dt>
+  	<dt id="WCEN-win-shortcut">
+       <a href="#" style='font-size: 12px;'> 
+       <img src="ext-3.0.3/desktop/images/48_48/WCEN.png"/><br>
+       		 餐厅管理</a>
+  	</dt>
+  	<dt id="WCEWM-win-shortcut">
+       <a href="#" style='font-size: 12px;'> 
+       <img src="ext-3.0.3/desktop/images/48_48/WCEWM.png"/><br>
+       		 服务员管理</a>
+  	</dt>
+  	<dt id="WCPP-win-shortcut">
+       <a href="#" style='font-size: 12px;'> 
+       <img src="ext-3.0.3/desktop/images/48_48/WCPP.png"/><br>
+       		 价格管理</a>
+  	</dt>
+  	<dt id="CONTRACT-win-shortcut">
+       <a href="#" style='font-size: 12px;'> 
+       <img src="ext-3.0.3/desktop/images/48_48/CONTRACT.png"/><br>
+       		 合同管理</a>
+  	</dt>
+  	<dt id="OPERATOR-win-shortcut">
+       <a href="#" style='font-size: 12px;'> 
+       <img src="ext-3.0.3/desktop/images/48_48/OPERATOR.png"/><br>
+       		 运营者管理</a>
+  	</dt>
+  	<dt id="OPERCONF-win-shortcut">
+       <a href="#" style='font-size: 12px;'> 
+       <img src="ext-3.0.3/desktop/images/48_48/OPERCONF.png"/><br>
+       		 运营配置</a>
+  	</dt>
+		<dt id="DIVIDE-win-shortcut">
+       <a href="#" style='font-size: 12px;'>
+       <img src="ext-3.0.3/desktop/images/48_48/DIVIDE.png"/><br>
+       		 比例分成</a>
+  	</dt>
+   </dl>
+</div>
+<div id="ux-taskbar">
+	<div id="ux-taskbar-start"></div>
+	<div id="ux-taskbuttons-panel"></div>
+	<div class="x-clear"></div>
+</div>
+</body>
+</html>

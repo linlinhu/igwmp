@@ -1,0 +1,18 @@
+{
+    "wineBusiess": [
+        {
+			"liquorId":"酒品识别码",
+			"primaryPrice":"酒品原价",
+            "sellPrice":"来e杯酒卖价格",
+			"channel":"酒品所在通道",
+			"remainder":"机器剩余酒水量",
+			"warningValue":"酒水警告值",
+			"resources":[{
+				"type":"资源描述  0 缩略图 1全屏展示图 以后扩展可添加",
+				"url":"图片地址",
+				"describe":""
+			}]
+        }
+       
+    ]
+}

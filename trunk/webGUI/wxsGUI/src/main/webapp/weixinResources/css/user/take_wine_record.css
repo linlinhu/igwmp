@@ -1,0 +1,75 @@
+.stastics_date {
+	color: #bbb;
+	height: 6vh;
+	line-height: 6vh;
+	margin-left: 4vw;
+	font-size: 1rem;
+}
+
+.mui-card {
+	border-top: #282828 solid 1px;
+	border-bottom: #282828 solid 1px;
+	margin: 0;
+	margin-bottom: 2vh;
+	background: #1C1C1C;
+}
+
+.mui-card-header.mui-card-media .mui-media-body {
+	margin-left: 0;
+	color: #999;
+	font-size: 1rem;
+}
+
+.mui-card-content-inner {
+	
+}
+
+.mui-card-header.mui-card-media {
+	padding: 15px;
+}
+
+/*.mui-card-content-inner img {
+				width: 20vw;
+			}*/
+img {
+	width: 26vw;
+	padding-left: 4vw;
+	margin-right: 4vw;
+	margin-top: 2vh;
+}
+
+.m-wine_info {
+	margin-top: 2vh;
+	width: 58vw;
+}
+
+.u-wine_name {
+	margin-top: 4vh;
+	font-size: 1rem;
+	color: #bbb;
+}
+
+.u-wine_price {
+	color: #999;
+}
+
+.u-wine_price .u-color_yellow {
+	color: #D09434;
+}
+
+.u-wine_price_right {
+	padding-left: 10vw;
+}
+
+.m-get_wine_code {
+	text-align: center;
+	margin-top: 2vh;
+	margin-bottom: 2vh;
+}
+
+.m-get_wine_code button {
+	color: #DFDBD5;
+	width: 40vw;
+	background: #D09434;
+	border-color: #D09434;
+}

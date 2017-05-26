@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="dadada">#DADADA</color>
+    <color name="ffffff">#FFFFFF</color>
+    <color name="e4e4e4">#E4E4E4</color>
+
+    <color name="black">#000000</color>
+
+    <color name="color_dialog_gray">#acacae</color>
+    <color name="color_dialog_content">#ed7861</color>
+    <color name="color_dialog_title">#303030</color>
+    <color name="color_dialog_content_prompt">#343434</color>
+    <color name="color_dialog_corlor">#8ECB54</color>
+    <color name="color_dialog_txbk">#ededf3</color>
+</resources>

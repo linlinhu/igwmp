@@ -1,0 +1,78 @@
+apply plugin: 'com.android.application'
+apply plugin: 'org.greenrobot.greendao'
+def releaseTime() {
+    return new Date().format("yyyy_MM_dd", TimeZone.getTimeZone("UTC"))
+}
+
+android {
+
+    lintOptions {
+        checkReleaseBuilds false
+        abortOnError false
+    }
+
+    signingConfigs {
+        config {
+            keyAlias 'laiebei_terminal'
+            keyPassword 'laiebei888'
+            storeFile file('key/laiebei_terminal.jks')
+            storePassword 'laiebei888'
+        }
+    }
+
+    greendao {
+        schemaVersion 3
+        daoPackage 'laiebei.terminal.dbm.dao'
+        targetGenDir 'src/main/java/'
+        //设置生成单元测试目录
+//        targetGenDirTest
+        //设置自动生成单元测试用例
+//        generateTests
+    }
+
+    compileSdkVersion 19
+    buildToolsVersion "24.0.3"
+
+    defaultConfig {
+        applicationId "com.laiebei.terminal"
+        minSdkVersion 17
+        targetSdkVersion 24
+        versionCode 32
+        versionName "2.1.0.6"
+        signingConfig signingConfigs.config
+    }
+
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.txt'
+            signingConfig signingConfigs.config
+            applicationVariants.all { variant ->
+                variant.outputs.each { output ->
+                    def outputFile = output.outputFile
+                    def fileName
+                    if (outputFile != null && outputFile.name.endsWith('.apk')) {
+
+                        if (variant.buildType.name.equals('release')) {
+                            // laiebei_v版本名-流水号-编译时间.apk
+                            fileName = "laiebei_v${defaultConfig.versionName}.${defaultConfig.versionCode}.apk"
+                        } else if (variant.buildType.name.equals('debug')) {
+                            fileName = "debug_v${defaultConfig.versionName}.${defaultConfig.versionCode}.apk"
+                        }
+                        output.outputFile = new File(outputFile.parent, fileName)
+                    }
+                }
+            }
+        }
+    }
+}
+
+dependencies {
+    compile fileTree(include: ['*.jar'], dir: 'libs')
+
+    compile 'com.alibaba:fastjson:1.2.13'
+    compile 'org.greenrobot:greendao:3.2.0'
+    compile 'io.netty:netty-all:4.1.8.Final'
+    compile 'com.jakewharton.timber:timber:4.1.2'
+
+}

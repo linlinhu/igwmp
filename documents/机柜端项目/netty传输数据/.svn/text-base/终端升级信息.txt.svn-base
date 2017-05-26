@@ -1,0 +1,14 @@
+{
+	"upgrade":{
+		"cname":"升级资源别名",
+	"type":"升级程序类型  0整包升级  1资源升级 2差分升级 3监控升级",
+    "versionCode": "10 升级版本号 由apk决定",
+	"versionName":"升级名 参照apk",
+    "time": "2017-2-3 14:49 版本最近一次改变时间",
+    "upgradeType": "升级类型 0正常升级  1强制升级 2闲时升级",
+    "packetName": "com.laiebei.monitor 程序包名，用于升级确认",
+    "url": "升级文件地址",
+    "md5": "MD5校验码"
+	}
+	
+}

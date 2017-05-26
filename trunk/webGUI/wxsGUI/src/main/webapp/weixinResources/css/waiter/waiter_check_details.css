@@ -1,0 +1,73 @@
+.mui-content {
+	height: 100vh;
+	background-image: url("img/background1.png");
+	background-repeat: no-repeat;
+	background-size: cover;
+	z-index: 1;
+	text-align: center;
+}
+
+.mui-pagination {
+	margin-top: 6vh;
+	font-size: .8rem;
+}
+
+.mui-content .mui-text-center .mui-pagination>li>a {
+	margin-left: 10px;
+}
+
+.mui-pagination>li>a {
+	border-radius: 6px;
+	color: #F15C55;
+	border-color: #F15C55;
+	background-color: transparent;
+}
+
+.mui-pagination>li:active>a:active {
+	background: #F15C55;
+	border-color: #F15C55;
+}
+
+.mui-pagination>li>a.m-active {
+	color: #fff;
+	background: #F15C55;
+	border-color: #F15C55;
+}
+
+.m-date_range {
+	margin-top: 6vh;
+	color: #605F5D;
+}
+
+.u-date_start {
+	font-size: .8rem;
+	height: 8vh;
+	background: #FFFBF2;
+	line-height: 8vh;
+	padding-left: 5vw;
+}
+
+.u-date_end {
+	font-size: .8rem;
+	margin-top: .8vh;
+	height: 8vh;
+	background: #FFFBF2;
+	line-height: 8vh;
+	padding-left: 5vw;
+}
+
+.u-btn_sure {
+	width: 90vw;
+	height: 6vh;
+	margin-top: 8vh;
+	color: #F8B2AF;
+	font-size: 1rem;
+}
+
+#date_start {
+	padding-right: 4vw;
+}
+
+#date_end {
+	padding-right: 4vw;
+}

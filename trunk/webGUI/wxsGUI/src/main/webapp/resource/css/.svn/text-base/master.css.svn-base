@@ -1,0 +1,38 @@
+/************
+ * 这是一个全局类样式库
+ * 声明了一些最基础的定义
+ * /
+/***/
+*{
+	margin: 0;
+	padding: 0;
+}
+body{
+	width: 100vw;
+	height: 100vh;
+	min-width: 800px;
+	min-height: 500px;
+	background-color: #fff;
+    font: 14px/1.5 Microsoft YaHei,tahoma,arial,Hiragino Sans GB,\\5b8b体,sans-serif;
+    color: #666;
+}
+input,textarea,button{
+	border: none !important;
+	background: rgba(0,0,0,0);
+	outline: none !important;
+	color: #666;
+}
+
+.m-bg{
+	background: #E84709;
+	color: #fff;
+}
+.m-clr{
+	color: #E84709;
+}
+.grey-bg{
+	background: #bcbcbc;
+}
+.grey-clr{
+	color:#bcbcbc
+}

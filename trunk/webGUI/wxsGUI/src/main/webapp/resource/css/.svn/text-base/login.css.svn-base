@@ -1,0 +1,58 @@
+/*********
+ * 这是登录页面的样式库
+ */
+header{
+	position: relative;
+	height:96px;
+	width: 60%;
+	margin: 0 auto;
+	
+}
+header .logo{
+	height: 66px;
+	width: 156px;
+	position: absolute;
+	top: 50%;
+	margin-top:-33px;
+}
+.content{
+	position: relative;
+	height: 60%;
+	min-height: 350px;
+	background: rgb(197,237,247);
+}
+footer{
+	position: relative;
+	width: 60%;
+	margin: 0 auto;
+	text-align: center;
+	padding-top: 50px;
+}
+.m-area{
+	width: 80%;
+	min-width: 600px;
+	margin: 0 auto;
+	height: 100%;
+}
+.m-area article{
+	width:50%;
+	height: 100%;
+	float: left;
+	position: relative;
+}
+
+.login-left,.login-wrap{
+	display: block;
+	width: 360px;
+	height: 300px;
+	position: absolute;
+	top:50%;
+	left: 50%;
+	margin:-140px 0 0 -180px;
+}
+.login-wrap{
+	padding:20px;
+	box-sizing: border-box;
+	background: #fff;
+	border-radius: 8px;
+}

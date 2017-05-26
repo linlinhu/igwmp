@@ -1,0 +1,146 @@
+
+			.g-personal_title {
+				height: 36vh;
+				background-image: url("../../img/background2.png");
+				background-repeat: no-repeat;
+				background-size: cover;
+				/*position: relative;*/
+				text-align: center;
+			}
+			.g-personal_title .m-restaurant_pos {
+				
+			}
+			.g-personal_title img {
+				margin-top: 3vh;
+				border-radius: 50%;
+				width: 30vw;
+				
+			}
+			.g-personal_title #allmap {
+				width: 6vw;
+				position: absolute;
+				top: 17.5vh;
+				
+			}
+			.m-waiter_name {
+				margin-top: 2vh;
+				font-size: 1.2rem;
+			}
+			
+			.m-waiter_name span{
+				font-size: 1rem;
+			}
+			
+			.g-personal_title .m-waiter_address {
+				font-size: 1rem;
+				color: #827F7F;
+			}
+			
+			.g-personal_title .m-waiter_integral {
+				color: #6B6968;
+				margin-top: 2vh;
+			}
+			
+			.g-personal_title .m-waiter_integral span {
+				color: #EA6F43;
+			}
+			
+			.mui-table-view {
+				background: transparent;
+			}
+			
+			.g-personal_content {
+				height: 64vh;
+				background-image: url(../../img/background1.png);
+				background-repeat: no-repeat;
+				background-size: cover;
+				display: flex;
+				justify-content:space-around;
+			}
+			.m-content1 {				
+				height: 64vh;
+				width: 50vw;
+				background: transparent;
+				display: flex;
+				flex-direction:column;
+				justify-content: space-around;
+				align-items: center;
+				
+			}
+			.m-content1_up {
+				display: flex;
+				justify-content: center;
+				align-items: center;
+				border: 1px solid #FFFBF2;
+				height: 30vh;
+				width: 47vw;	
+				background: #FFFBF2;		
+			}
+			.m-content1_up span {
+				padding-top: 16vw;
+				background-image: url(../../img/waiter_personal2.png);
+				background-size: 12vw;
+				background-repeat: no-repeat;
+				background-position-x: 8vw;
+				color: #8A8886;
+			}
+			.m-content1_down {
+				display: flex;
+				justify-content: center;
+				align-items: center;
+				height: 30vh;
+				width: 47vw;
+				border: 1px solid #FFFBF2;
+				background: #FFFBF2;
+			}
+			.m-content1_down span {
+				padding-top: 16vw;
+				background-image: url(../../img/waiter_personal5.png);
+				background-size: 12vw;
+				background-repeat: no-repeat;
+				background-position-x: 10vw;
+				color: #8A8886;
+			}
+			.m-content2 {
+				height: 64vh;
+				width: 50vw;
+				background: transparent;
+				display: flex;
+				flex-direction:column;
+				justify-content: space-around;
+				align-items: center;
+			}
+			.m-content2_up {
+				display: flex;
+				justify-content: center;
+				align-items: center;
+				border: 1px solid #FFFBF2;
+				height: 30vh;
+				width: 47vw;	
+				background: #FFFBF2;		
+			}
+			.m-content2_up span {
+				padding-top: 16vw;
+				background-image: url(../../img/waiter_personal1.png);
+				background-size: 12vw;
+				background-repeat: no-repeat;
+				background-position-x: 10vw;
+				color: #8A8886;
+			}
+			.m-content2_down {
+				display: flex;
+				justify-content: center;
+				align-items: center;
+				height: 30vh;
+				width: 47vw;
+				border: 1px solid #FFFBF2;
+				background: #FFFBF2;
+			}
+			.m-content2_down span {
+				padding-top: 16vw;
+				background-image: url(../../img/waiter_personal6.png);
+				background-size: 12vw;
+				background-repeat: no-repeat;
+				background-position-x: 10vw;
+				color: #8A8886;
+			}

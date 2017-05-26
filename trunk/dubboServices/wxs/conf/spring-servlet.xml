@@ -1,0 +1,127 @@
+<?xml version="1.0" encoding="UTF-8"?> 
+<beans xmlns="http://www.springframework.org/schema/beans" 
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:context="http://www.springframework.org/schema/context" 
+    xmlns:aop="http://www.springframework.org/schema/aop" 
+    xmlns:tx="http://www.springframework.org/schema/tx" 
+    xmlns:mvc="http://www.springframework.org/schema/mvc"
+    xmlns:dubbo="http://code.alibabatech.com/schema/dubbo"
+    xmlns:util="http://www.springframework.org/schema/util"
+    xsi:schemaLocation="http://www.springframework.org/schema/beans 
+     http://www.springframework.org/schema/beans/spring-beans-4.0.xsd 
+http://www.springframework.org/schema/context 
+http://www.springframework.org/schema/context/spring-context-4.0.xsd 
+http://www.springframework.org/schema/tx 
+http://www.springframework.org/schema/tx/spring-tx-4.0.xsd 
+http://www.springframework.org/schema/aop 
+http://www.springframework.org/schema/aop/spring-aop-4.0.xsd
+http://www.springframework.org/schema/mvc
+http://www.springframework.org/schema/mvc/spring-mvc-4.0.xsd
+http://code.alibabatech.com/schema/dubbo       
+http://code.alibabatech.com/schema/dubbo/dubbo.xsd
+">
+   <!-- 启用spring mvc 注解 -->
+    <context:annotation-config />
+   
+    <!-- 设置使用注解的类所在的jar包 -->
+    <context:component-scan base-package="com.emin" ></context:component-scan>
+    <aop:aspectj-autoproxy proxy-target-class="true"></aop:aspectj-autoproxy>
+	<aop:config proxy-target-class="true"></aop:config>
+	<bean id="springContextHolder" class="com.emin.base.util.SpringContextHolder"></bean>
+	<bean id="placeholderConfig" class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
+		<property name="location" value="classpath:/db.properties" />
+	</bean>
+	<bean id="dataSource" class="com.mchange.v2.c3p0.ComboPooledDataSource"
+		>
+		<property name="driverClass" value="${db.driverClass}" />
+		<property name="jdbcUrl" value="${db.plt.baseUrl}/${db.plt.name}" />
+		<property name="user" value="${db.plt.user}" />
+		<property name="password" value="${db.plt.password}" />
+		<property name="minPoolSize" value="${db.minPoolSize}" />
+		<property name="maxPoolSize" value="${db.maxPoolSize}" />
+		<property name="initialPoolSize" value="${db.initialPoolSize}" />
+		<property name="maxIdleTime" value="${db.maxIdleTime}" />
+		<property name="acquireIncrement" value="${db.acquireIncrement}" />
+		<property name="maxStatements" value="${db.maxStatements}" />
+		<property name="idleConnectionTestPeriod" value="${db.idleConnectionTestPeriod}" />
+		<property name="acquireRetryAttempts" value="${db.acquireRetryAttempts}" />
+		<property name="breakAfterAcquireFailure" value="${db.breakAfterAcquireFailure}" />
+		<property name="testConnectionOnCheckout" value="${db.testConnectionOnCheckout}" />
+	</bean>
+	<bean id="sessionFactory" class="org.springframework.orm.hibernate5.LocalSessionFactoryBean">		
+		<!-- 依赖注入上面定义的数据源dataSource -->  
+        <property name="dataSource" ref="dataSource" /> 
+        <property name="hibernateProperties">
+			<props>
+				<prop key="hibernate.dialect">
+					${hibernate.dialect}
+				</prop>
+				<prop key="hibernate.show_sql">
+					${hibernate.show_sql}
+				</prop>
+				<prop key="use_sql_comments">${use_sql_comments}</prop>
+				<prop key="hibernate.format_sql">
+					${hibernate.format_sql}
+				</prop>
+				<prop key="hibernate.generate_statistics">
+					${hibernate.generate_statistics}
+				</prop>
+				<prop key="hibernate.jdbc.batch_size">
+					${hibernate.jdbc.batch_size}
+				</prop>
+				<prop key="hibernate.connection.release_mode">
+					${hibernate.connection.release_mode}
+				</prop>
+				<prop key="hibernate.hbm2ddl.auto">					
+					${hibernate.hbm2ddl.auto}
+				</prop>				
+				<prop key="hibernate.cache.region.factory_class">org.hibernate.cache.ehcache.EhCacheRegionFactory</prop>
+				<prop key="hibernate.cache.use_query_cache">true</prop>
+			</props>
+		</property>
+		<property name="packagesToScan">
+			<list>
+				<value>com.emin.platform.domain</value>
+				<value>com.emin.wxs.domain</value>			
+			</list>
+		</property>
+	</bean>
+	
+	<bean class="org.springframework.dao.annotation.PersistenceExceptionTranslationPostProcessor" />
+	
+	  <!--定义Hibernate的事务管理器HibernateTransactionManager -->  
+    <bean id="transactionManager" class="org.springframework.orm.hibernate5.HibernateTransactionManager">  
+        <!-- 依赖注入上面定义的sessionFactory -->  
+        <property name="sessionFactory" ref="sessionFactory" />  
+    </bean> 
+	<tx:annotation-driven transaction-manager="transactionManager" /> 
+    <!-- DUBBO 扫描service服务 -->
+    <dubbo:application name="wxs" />
+	<dubbo:registry address="zookeeper://192.168.6.201:2181" file="dubbo-wxs.cache"/>
+	<dubbo:consumer check="false" timeout="5000"></dubbo:consumer><!-- 启动时不检查 -->
+	<!-- 扫描注解包路径，多个包用逗号分隔，不填pacakge表示扫描当前ApplicationContext中所有的类 -->
+	<dubbo:annotation />
+	<dubbo:protocol name="dubbo" port="21067"></dubbo:protocol>
+	<dubbo:provider accesslog="true" timeout="5000"></dubbo:provider>
+	<dubbo:service interface="com.emin.wxs.service.FansService" ref="fansService" version="0.0.1" protocol="dubbo"/>
+	<dubbo:service interface="com.emin.wxs.service.RedPackConfService" ref="redPackConfService" version="0.0.1" protocol="dubbo"/>
+	<dubbo:service interface="com.emin.wxs.service.RedPackActivityRecordService" ref="redPackActivityRecordService" version="0.0.1" protocol="dubbo"/>
+	<dubbo:service interface="com.emin.wxs.service.RedPackRecordService" ref="redPackRecordService" version="0.0.1" protocol="dubbo"/>
+	<dubbo:service interface="com.emin.wxs.service.WeixinToolService" ref="weixinToolService" version="0.0.1" protocol="dubbo" retries="0" timeout="5000"/>
+	<dubbo:service interface="com.emin.wxs.service.WeixinKeyReplyService" ref="weixinKeyReplyService" version="0.0.1" protocol="dubbo"/>
+	<dubbo:service interface="com.emin.wxs.service.WeixinEventReplyService" ref="weixinEventReplyService" version="0.0.1" protocol="dubbo"/>
+	<dubbo:service interface="com.emin.wxs.service.WxOfficialAccountService" ref="wxOfficialAccountService" version="0.0.1" protocol="dubbo"/>
+    <dubbo:service interface="com.emin.wxs.service.WxMenuService" ref="wxMenuService" version="0.0.1" protocol="dubbo"></dubbo:service>
+    <dubbo:service interface="com.emin.wxs.service.WeixinArticalService" ref="weixinArticalService" version="0.0.1" protocol="dubbo"></dubbo:service>
+    <dubbo:service interface="com.emin.wxs.service.WeixinMsgReplyService" ref="weixinMsgReplyService" version="0.0.1" protocol="dubbo"></dubbo:service>
+    <dubbo:service interface="com.emin.wxs.service.WeixinFileService" ref="weixinFileService" version="0.0.1" protocol="dubbo"></dubbo:service>
+    <dubbo:service interface="com.emin.wxs.service.WeixinWebPageService" ref="weixinWebPageService" version="0.0.1" protocol="dubbo"></dubbo:service>
+    <dubbo:service interface="com.emin.wxs.service.WeixinWebPageCategoryService" ref="weixinWebPageCategoryService" version="0.0.1" protocol="dubbo"></dubbo:service>
+    <dubbo:service interface="com.emin.wxs.service.PermissionService" ref="permissionService" version="0.0.1" protocol="dubbo"></dubbo:service>
+    <!-- <mvc:interceptors>
+        <mvc:interceptor>  
+            <mvc:mapping path="/**/*.htm" />           
+            <bean class="com.emin.cis.util.AuthorizationInterceptor"></bean>  
+        </mvc:interceptor>  
+    </mvc:interceptors>  -->
+  </beans>

@@ -1,0 +1,132 @@
+<?xml version="1.0" encoding="UTF-8"?> 
+<beans xmlns="http://www.springframework.org/schema/beans" 
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:context="http://www.springframework.org/schema/context" 
+    xmlns:aop="http://www.springframework.org/schema/aop" 
+    xmlns:tx="http://www.springframework.org/schema/tx" 
+    xmlns:mvc="http://www.springframework.org/schema/mvc"
+    xmlns:dubbo="http://code.alibabatech.com/schema/dubbo"
+    xmlns:util="http://www.springframework.org/schema/util"
+    xsi:schemaLocation="http://www.springframework.org/schema/beans 
+     http://www.springframework.org/schema/beans/spring-beans-4.2.xsd 
+http://www.springframework.org/schema/context 
+http://www.springframework.org/schema/context/spring-context-4.2.xsd 
+http://www.springframework.org/schema/tx 
+http://www.springframework.org/schema/tx/spring-tx-4.2.xsd 
+http://www.springframework.org/schema/aop 
+http://www.springframework.org/schema/aop/spring-aop-4.2.xsd
+http://www.springframework.org/schema/mvc
+http://www.springframework.org/schema/mvc/spring-mvc-4.2.xsd
+http://code.alibabatech.com/schema/dubbo       
+http://code.alibabatech.com/schema/dubbo/dubbo.xsd
+">
+    <!-- 启用spring mvc 注解 -->
+    <context:annotation-config /> 
+    
+    <mvc:resources location="/ace/" mapping="/ace/**"/> 
+    <mvc:resources location="/css/" mapping="/css/**"/> 
+    <mvc:resources location="/resources/" mapping="/resources/**"/>
+    <mvc:resources location="/js/" mapping="/js/**"/> 
+    <mvc:resources location="/" mapping="/*.html"/>
+    <!-- 设置使用注解的类所在的jar包 -->
+    <context:component-scan base-package="com.emin.wxs"></context:component-scan>
+    
+	<bean id="springContextHolder" class="com.emin.base.util.SpringContextHolder"></bean>
+	
+     <!-- 完成请求和注解POJO的映射 -->
+    <bean class="org.springframework.web.servlet.mvc.annotation.AnnotationMethodHandlerAdapter">      
+        <property name="messageConverters">      
+            <list >      
+                <ref bean="mappingJacksonHttpMessageConverter" />
+                <bean class="org.springframework.http.converter.ByteArrayHttpMessageConverter"/>  
+			    <bean class="org.springframework.http.converter.StringHttpMessageConverter"/>  
+			    <bean class="org.springframework.http.converter.FormHttpMessageConverter"/>   
+            </list>     
+        </property>      
+    </bean>
+    
+    <bean class="org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping"/>
+    <!-- 处理JSON数据转换的 -->  
+    <bean class="org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter">
+        <property name="messageConverters">
+            <list>
+               <ref bean="mappingJacksonHttpMessageConverter" />
+                <bean class="org.springframework.http.converter.ByteArrayHttpMessageConverter"/>  
+			    <bean class="org.springframework.http.converter.StringHttpMessageConverter"/>  
+			    <bean class="org.springframework.http.converter.FormHttpMessageConverter"/>   
+            </list>
+        </property>
+    </bean>
+    <bean id="mappingJacksonHttpMessageConverter"   
+        class="org.springframework.http.converter.json.MappingJackson2HttpMessageConverter">   
+		<!-- 为了处理返回的JSON数据的编码，默认是ISO-88859-1的，这里把它设置为UTF-8,解决有乱码的情况    -->
+        <property name="supportedMediaTypes">    
+            <list>    
+                 <value>application/json; charset=UTF-8</value>
+				 <value>text/html; charset=UTF-8</value>
+				 <value>application/x-www-form-urlencoded; charset=UTF-8</value> 
+            </list>    
+        </property>    
+    </bean> 
+    
+    <bean id="multipartResolver" class="org.springframework.web.multipart.commons.CommonsMultipartResolver">  
+<!--         set the max upload size100MB   -->
+        <property name="maxUploadSize">  
+            <value>104857600</value>  
+        </property>  
+        <property name="maxInMemorySize">  
+            <value>4096</value>  
+        </property>  
+        <property name="defaultEncoding">
+        	<value>UTF-8</value>
+        </property>
+    </bean>
+    <bean id="viewResolver"  
+        class="org.springframework.web.servlet.view.freemarker.FreeMarkerViewResolver">  
+        <property name="cache" value="true" />  
+        <property name="prefix" value="" />  
+        <property name="suffix" value=".ftl" />  
+        <property name="contentType" value="text/html;charset=UTF-8"></property>  
+        <property name="requestContextAttribute" value="request" />  
+        <property name="exposeSpringMacroHelpers" value="true" />  
+        <property name="exposeRequestAttributes" value="true" />  
+        <property name="exposeSessionAttributes" value="true" />  
+    </bean>  
+    <bean id="freemarkerConfig" class="org.springframework.web.servlet.view.freemarker.FreeMarkerConfigurer">
+   	<property name="templateLoaderPath" value="/WEB-INF/view/" />  
+    <property name="freemarkerSettings">  
+        <props>  
+            <prop key="template_update_delay">0</prop>  
+            <prop key="default_encoding">UTF-8</prop>  
+            <prop key="number_format">0.##########</prop>  
+            <prop key="datetime_format">yyyy-MM-dd HH:mm:ss</prop>  
+            <prop key="classic_compatible">true</prop>  
+            <prop key="template_exception_handler">ignore</prop>  
+        </props>  
+    </property> 
+    </bean>
+    <dubbo:application name="wxs-gui"/>
+
+	<!--<dubbo:registry address="zookeeper://192.168.0.222:2181" />-->
+    <dubbo:registry address="zookeeper://192.168.6.201:2181" />
+
+	<dubbo:consumer check="false"></dubbo:consumer><!-- 启动时不检查  -->
+	<!-- 扫描注解包路径，多个包用逗号分隔，不填pacakge表示扫描当前ApplicationContext中所有的类 -->
+	<dubbo:annotation />
+    <!--<dubbo:protocol name="dubbo" port="20084"></dubbo:protocol>-->
+    <!--<dubbo:provider accesslog="true"></dubbo:provider>-->
+
+	<mvc:interceptors>
+        <!--微信餐厅老板登录拦截器-->
+        <mvc:interceptor>
+            <mvc:mapping path="/**/resLog/*.do" />
+            <mvc:mapping path="/**/restaurant/*.do" />
+            <bean class="com.emin.wxs.util.AuthorWxRestaurantInterceptor"></bean>
+        </mvc:interceptor>
+        <mvc:interceptor> 
+            <mvc:mapping path="/**/*.do" />    
+            <mvc:mapping path="/*.htm" />    
+            <bean class="com.emin.wxs.util.AuthorizationInterceptor"></bean>
+        </mvc:interceptor> 
+    </mvc:interceptors> 
+  </beans>

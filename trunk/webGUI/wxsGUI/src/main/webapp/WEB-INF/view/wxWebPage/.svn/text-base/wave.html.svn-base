@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+<meta charset="UTF-8">
+
+<title>CSS3 波浪形式的动画</title>
+
+<style>
+html, body {
+	height: 100%;
+}
+
+html {
+	background: #eee;
+}
+/*定位*/
+body {
+	display: -webkit-box;
+	display: -webkit-flex;
+	display: -ms-flexbox;
+	/*display: flex;*/
+	-webkit-box-pack: center;
+	-webkit-justify-content: center;
+	-ms-flex-pack: center;
+	justify-content: center;
+	-webkit-box-align: center;
+	-webkit-align-items: center;
+	-ms-flex-align: center;
+	align-items: center;
+}
+/*盒子的大小样式*/
+.box {
+	width: 100vw;
+	height: 100vw;
+	border-radius: 5px;
+	box-shadow: 0 2px 30px rgba(0, 0, 0, 0.2);
+	background: #fbfcee;
+	position: relative;
+	overflow: hidden;
+	-webkit-transform: translate3d(0, 0, 0);
+	transform: translate3d(0, 0, 0);
+}
+
+.wave {
+	opacity: .3;
+	position: absolute;
+	top: 90%;
+	left: 20%;
+	background: #404247;
+	width: 1500px;
+	height: 1500px;
+	margin-left: -400px;
+	margin-top: -250px;
+	-webkit-transform-origin: 20% 30% 20%;
+	transform-origin: 20% 30% 20%;
+	border-radius: 43%;
+	-webkit-animation: drift 8000ms infinite linear;
+	animation: drift 8000ms infinite linear;
+}
+
+.wave.-two {
+	-webkit-animation: drift 12000ms infinite linear;
+	animation: drift 12000ms infinite linear;
+	opacity: .3;
+	background: #4c5057;
+}
+/*.box:after {
+				content: '';
+				display: block;
+				left: 0;
+				top: 0;
+				width: 100%;
+				height: 100%;
+				background: -webkit-linear-gradient(top, #ee88aa, rgba(221, 238, 255, 0) 80%, rgba(255, 255, 255, 0.5));
+				background: linear-gradient(to bottom, #ee88aa, rgba(221, 238, 255, 0) 80%, rgba(255, 255, 255, 0.5));
+				z-index: 11;
+				-webkit-transform: translate3d(0, 0, 0);
+				transform: translate3d(0, 0, 0);
+			}*/
+/*.title {
+				position: absolute;
+				left: 0;
+				top: 0;
+				width: 100%;
+				z-index: 1;
+				line-height: 300px;
+				text-align: center;
+				-webkit-transform: translate3d(0, 0, 0);
+				transform: translate3d(0, 0, 0);
+				color: white;
+				text-transform: uppercase;
+				font-family: 'Playfair Display', serif;
+				letter-spacing: .4em;
+				font-size: 24px;
+				text-shadow: 0 1px 0 rgba(0, 0, 0, 0.1);
+				text-indent: .3em;
+			}*/
+@
+-webkit-keyframes drift {from { -webkit-transform:rotate(0deg);
+	transform: rotate(0deg);
+}
+
+from {
+	-webkit-transform: rotate(90deg);
+	transform: rotate(90deg);
+}
+
+}
+@
+keyframes drift {from { -webkit-transform:rotate(0deg);
+	transform: rotate(0deg);
+}
+
+from {
+	-webkit-transform: rotate(360deg);
+	transform: rotate(360deg);
+}
+}
+</style>
+
+</head>
+
+<body translate="no">
+
+	<div class='box'>
+		<div class='wave -one'></div>
+		<div class='wave -two'></div>
+		<div class='wave -three'></div>
+
+	</div>
+
+</body>
+
+</html>

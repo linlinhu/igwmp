@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>登录</title>
+		<link rel="stylesheet" href="css/mui.min.css" />
+		<link type="text/css" charset="utf-8" href="resource/css/master.css" rel="stylesheet"/>
+		<link type="text/css" charset="utf-8" href="resource/css/form.css" rel="stylesheet"/>
+		<link type="text/css" charset="utf-8" href="resource/css/icon.css" rel="stylesheet"/>
+		<link type="text/css" charset="utf-8" href="resource/css/login.css" rel="stylesheet"/>
+	</head>
+	<body>
+		<header><icon class="logo"></icon></header>
+		<div class="content ">
+			<div class="space"></div>
+			<section class="m-area ">
+				<article>
+					<icon class="login-left"></icon>
+				</article>
+				<article>
+					<div class="f-wrap login-wrap ">
+						<div class="m-clr">用户登录</div>
+						<div class="f-row ">
+							<icon class="user"></icon>
+							<input type="text" placeholder="手机号/邮箱号/来一杯账户" id="loginName"/>
+						</div>
+						<div class="f-row ">
+							<icon class="pwd"></icon>
+							<input type="password" placeholder="密码" id="loginPwd" />
+						</div>
+						<div class="f-assist grey-clr">
+							 <icon id="rememberPwd" class="unchecked checked" onclick="toggleChecked()"></icon>记住密码
+						</div>
+						<button class="f-btn m-bg" onclick="loginIn();">登录</button>
+					</div>
+				</article>
+			</section>
+			<div class="space"></div>
+		</div>
+		<footer>
+			蜀备号：512-5564566-133
+		</footer>
+	</body>
+	
+<script src="ext-3.0.3/adapter/ext/ext-base.js" type="text/javascript" charset="utf-8"></script>
+
+<script src="ext-3.0.3/adapter/ext/ext-basex.js" type="text/javascript" charset="utf-8"></script>
+<script src="ext-3.0.3/ext-all.js" type="text/javascript" charset="utf-8"></script>
+<script src="js/md5-min.js" type="text/javascript" charset="utf-8"></script>
+<script src="js/Base64.js" type="text/javascript" charset="utf-8"></script>
+<script src="js/mui.js" type="text/javascript" charset="utf-8"></script>
+
+
+<script type="text/javascript">
+	function loginIn(){
+		var ln = Ext.get("loginName").getValue();
+		var lp = hex_md5(Ext.get("loginPwd").getValue());
+		Ext.Ajax.request({
+		   url: 'login.do',
+		   params: { cellNumber: ln,password:lp },
+		   success: function(response){
+			   var r = Ext.decode(response.responseText)
+			   if(r.success){
+				   location.href = "index.htm";
+			   }else{
+			   	   mui.alert(r.message?r.message:"登录失败","登录信息"); 
+			   }
+		   },
+		   failure: function(e){
+			   
+		   },
+		});
+	}
+	
+	function toggleChecked(){
+		Ext.fly("rememberPwd").toggleClass("checked");
+	}
+</script>
+</html>

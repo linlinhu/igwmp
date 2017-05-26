@@ -1,0 +1,146 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd"
+	xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+	<modelVersion>4.0.0</modelVersion>
+	<parent>
+		<groupId>com.emin.igwmp</groupId>
+		<artifactId>igwmp</artifactId>
+		<version>1.1.1-SNAPSHOT</version>
+	</parent>
+	<groupId>com.emin.igwmp.rs</groupId>
+	<artifactId>rs</artifactId>
+	<version>1.1.1-SNAPSHOT</version>
+	<name>rs</name>
+	<url>http://maven.apache.org</url>
+ 
+	 
+		<dependencies>
+			<!-- common -->
+			<dependency> 
+				<groupId>junit</groupId>
+				<artifactId>junit</artifactId>				 
+			</dependency>
+			<dependency>
+                <groupId>commons-io</groupId>
+                <artifactId>commons-io</artifactId> 
+            </dependency>
+            <dependency>
+                <groupId>org.apache.commons</groupId>
+                <artifactId>commons-lang3</artifactId> 
+            </dependency>
+            <dependency>
+                <groupId>commons-collections</groupId>
+                <artifactId>commons-collections</artifactId> 
+            </dependency>
+            <dependency>
+                <groupId>commons-fileupload</groupId>
+                <artifactId>commons-fileupload</artifactId> 
+            </dependency>
+            <dependency>
+                <groupId>org.slf4j</groupId>
+                <artifactId>slf4j-api</artifactId> 
+            </dependency>
+            <dependency>
+                <groupId>org.slf4j</groupId>
+                <artifactId>slf4j-log4j12</artifactId> 
+            </dependency>
+            <dependency>
+                <groupId>log4j</groupId>
+                <artifactId>log4j</artifactId> 
+            </dependency>
+            <!-- javax -->
+            <dependency>
+                <groupId>javax.activation</groupId>
+                <artifactId>activation</artifactId> 
+            </dependency>
+            <dependency>
+                <groupId>javax.transaction</groupId>
+                <artifactId>jta</artifactId> 
+            </dependency> 
+            <dependency>
+                <groupId>com.alibaba</groupId>
+                <artifactId>fastjson</artifactId> 
+            </dependency>
+
+            <!-- database -->
+            <dependency>
+                <groupId>org.hibernate</groupId>
+                <artifactId>hibernate-core</artifactId> 
+            </dependency>
+            <dependency>
+                <groupId>org.hibernate</groupId>
+                <artifactId>hibernate-ehcache</artifactId> 
+            </dependency>
+            <dependency>
+                <groupId>org.hibernate</groupId>
+                <artifactId>hibernate-search-orm</artifactId> 
+            </dependency> 
+            <dependency>
+                <groupId>postgresql</groupId>
+                <artifactId>postgresql</artifactId> 
+            </dependency>
+
+            <dependency>
+                <groupId>org.aspectj</groupId>
+                <artifactId>aspectjweaver</artifactId> 
+            </dependency>
+
+
+            <!-- spring -->
+            <dependency>
+                <groupId>org.springframework</groupId>
+                <artifactId>spring-beans</artifactId> 
+            </dependency>
+            <dependency>
+                <groupId>org.springframework</groupId>
+                <artifactId>spring-context</artifactId> 
+            </dependency>
+            <dependency>
+                <groupId>org.springframework</groupId>
+                <artifactId>spring-context-support</artifactId> 
+            </dependency>
+            <dependency>
+                <groupId>org.springframework</groupId>
+                <artifactId>spring-aop</artifactId> 
+            </dependency>
+            <dependency>
+                <groupId>org.springframework</groupId>
+                <artifactId>spring-jdbc</artifactId> 
+            </dependency>
+            <dependency>
+                <groupId>org.springframework</groupId>
+                <artifactId>spring-orm</artifactId> 
+            </dependency> 
+            <dependency>
+                <groupId>org.springframework</groupId>
+                <artifactId>spring-test</artifactId> 
+            </dependency>
+			<dependency>
+			  <groupId>com.emin</groupId>
+			  <artifactId>base</artifactId> 
+			</dependency>
+ 
+            <dependency>
+                <groupId>com.fasterxml.jackson.core</groupId>
+                <artifactId>jackson-annotations</artifactId>
+                <version>2.2.3</version>
+            </dependency>
+
+
+            <!-- https://mvnrepository.com/artifact/com.alibaba/dubbo -->
+            <dependency>
+                <groupId>com.alibaba</groupId>
+                <artifactId>dubbo</artifactId>
+                <version>2.4.8</version>
+            </dependency>
+
+            <!--连接池-->
+            <dependency>
+                <groupId>c3p0</groupId>
+                <artifactId>c3p0</artifactId>
+                <version>0.9.1.2</version>
+            </dependency>
+        </dependencies>
+	   
+</project>

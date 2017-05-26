@@ -1,0 +1,50 @@
+/***********
+ * 这是一个表单样式库 
+ * */
+.f-wrap{
+	display: block;
+}
+.f-row{
+	height: 40px;
+	border: 1px solid #f2f2f2;
+	border-radius: 4px;
+	padding: 10px 0;
+	box-sizing: border-box;
+}
+.f-row input{
+	margin: 0 10px;
+	height: 20px;
+	line-height: 20px;
+	width: 240px;
+	box-sizing: content-box;
+	padding: 0;
+}
+.f-wrap icon{
+	padding: 0 10px;
+	float: left;    
+	box-sizing: content-box;
+}
+.f-row icon{
+	width: 20px;
+	height: 20px;
+	border-right: 1px solid #f2f2f2;
+}
+.f-assist{
+	height: 15px;
+	line-height: 15px;
+}
+.f-assist icon{
+	width: 15px;
+	height: 15px;
+}
+
+.f-btn{
+	height: 42px;
+	width: 100%;
+	border-radius: 4px;
+}
+.f-row,.f-assist,.f-btn{
+	margin-top: 18px;
+	
+}
+/****form css end*****/

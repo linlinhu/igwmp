@@ -1,0 +1,118 @@
+.mui-card {
+	background: #1c1c1c;
+	margin-bottom: 2vh;
+}
+
+div.second {
+	margin-bottom: 1vh;
+}
+
+.mui-card li {
+	list-style: none;
+}
+
+.m-porter_info {
+	margin: 6vh 30vw;
+	font-size: 2rem;
+	color: #666;
+}
+
+.u-porter_code {
+	text-align: center;
+	margin-bottom: 6vh;
+	color: #ca9331;
+	font-size: 1.8rem;
+}
+
+.u-date_valid {
+	text-align: center;
+	color: #676767;
+	font-size: 1.4rem;
+}
+
+.mui-card-content-inner .u-introduce {
+	text-align: center;
+	color: #333;
+	font-size: 1rem;
+}
+
+.mui-card a.u-waiter {
+	color: #ca9331;
+	font-size: 1.6rem;
+}
+
+.m-share {
+	width: 100%;
+	padding: 2vh 0 0 2vh;
+	margin-top: 4vh;
+}
+
+.m-share button {
+	width: 40%;
+	height: 6vh;
+}
+
+.m-share .share {
+	background-color: #ec6739;
+	border: 1px solid #ec6739;
+	color: #fdc1a4;
+}
+
+.m-share .give {
+	float: right;
+	margin-right: 2vh;
+	background-color: #f29e3f;
+	border: 1px solid #f29e3f;
+	color: #f3f1b3;
+}
+
+.mui-collapse a {
+	background: #1C1C1C;
+}
+
+.mui-table-view-cell.mui-collapse .mui-collapse-content {
+	background: #1c1c1c;
+}
+
+.mui-collapse-content .mui-input-group {
+	background: #1c1c1c;
+}
+
+.m-waiter_num {
+	margin-top: 2vh;
+}
+
+.u-mobile_box {
+	background: #d9d9d9;
+	width: 50vw;
+	/*height: 4vh;*/
+	margin-left: 8vw;
+	line-height: 0vh;
+	border-radius: 6px;
+}
+
+div.m-code {
+	margin-top: 4vh;
+	color: #979797;
+}
+
+.m-code img {
+	height: 12vh;
+	width: 12vh;
+}
+
+.u-btn_sure {
+	margin-right: 10vw;
+	line-height: 3vh;
+	width: 14vw;
+	height: 6vh;
+	color: #979797;
+}
+
+.mui-table-view-cell>a:not (.mui-btn ).mui-active {
+	background: #1c1c1c;
+}
+
+.mui-table-view-cell.mui-active {
+	background: #1C1C1C;
+}

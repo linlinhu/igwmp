@@ -1,0 +1,106 @@
+
+<!DOCTYPE HTML>
+
+<html>
+<head>
+<meta http-equiv="X-UA-Compatible" content="IE=EmulateIE8"/> 
+<title>后台管理</title>
+<link rel='icon' href='img/icon.ico' type='image/x-ico' /> 
+<link type="text/css" charset="utf-8" href="ext-3.0.3/resources/css/ext-all.css" rel="stylesheet"/>
+<link type="text/css" charset="utf-8" href="ext-3.0.3/multiselect.css" rel="stylesheet"/>
+<link type="text/css" charset="utf-8" href="ext-3.0.3/ColumnHeaderGroup.css" rel="stylesheet"/>
+<link type="text/css" charset="utf-8" href="ext-3.0.3/desktop/css/desktop.css" rel="stylesheet"/>
+<link type="text/css" charset="utf-8" href="resource/css/ewm.css" rel="stylesheet"/> 
+<link type="text/css" charset="utf-8" href="resource/css/phone.css" rel="stylesheet"/> 
+<link type="text/css" charset="utf-8" href="ext-3.0.3/ux/treegrid/treegrid.css" rel="stylesheet"/>
+<link type="text/css" charset="utf-8" href="js/uploadPanel/UploadPanel.css" rel="stylesheet"/>
+<script type="text/javascript">
+</script>
+<script src="ext-3.0.3/adapter/ext/ext-base.js" type="text/javascript" charset="utf-8"></script>
+<script src="ext-3.0.3/adapter/ext/ext-basex.js" type="text/javascript" charset="utf-8"></script>
+<script src="ext-3.0.3/ext-all.js" type="text/javascript" charset="utf-8"></script>
+<script src="ext-3.0.3/ColumnHeaderGroup.js" type="text/javascript" charset="utf-8"></script>
+<script src="ext-3.0.3/ux/treegrid/TreeGrid.js" type="text/javascript" charset="utf-8"></script>
+<script src="ext-3.0.3/ux/treegrid/TreeGridColumnResizer.js" type="text/javascript" charset="utf-8"></script>
+<script src="ext-3.0.3/ux/treegrid/TreeGridColumns.js" type="text/javascript" charset="utf-8"></script>
+<script src="ext-3.0.3/ux/treegrid/TreeGridLoader.js" type="text/javascript" charset="utf-8"></script>
+<script src="ext-3.0.3/ux/treegrid/TreeGridNodeUI.js" type="text/javascript" charset="utf-8"></script>
+<script src="ext-3.0.3/ux/treegrid/TreeGridSorter.js" type="text/javascript" charset="utf-8"></script>
+<link type="text/css" href="ext-3.0.3/ux/treegrideditor/treegrideditor.css" rel="stylesheet" />
+<script type="text/javascript" src="ext-3.0.3/ux/treegrideditor/TreeGridEditor.js"></script>
+<script type="text/javascript" src="ext-3.0.3/ux/treegrideditor/TreeGridEditorEventModel.js"></script>
+<script type="text/javascript" src="ext-3.0.3/ux/treegrideditor/TreeGridEditorNode.js"></script>
+<script type="text/javascript" src="ext-3.0.3/ux/treegrideditor/TreeGridEditorNodeUI.js"></script>
+<script type="text/javascript" src="ext-3.0.3/ux/treegrideditor/TreeGridEditorNodeReader.js"></script>
+<script type="text/javascript" src="ext-3.0.3/ux/treegrideditor/TreeGridEditorNodeWriter.js"></script>
+<script type="text/javascript" src="ext-3.0.3/ux/treegrideditor/TreeGridEditorLoader.js"></script>
+<script type="text/javascript" src="ext-3.0.3/ux/treegrideditor/TreeGridEditorDragZone.js"></script>
+<script type="text/javascript" src="ext-3.0.3/ux/treegrideditor/TreeGridEditorSelectionModel.js"></script>
+<script type="text/javascript" src="ext-3.0.3/ux/treegrideditor/locale/tge-lang-zh_CN.js"></script>
+<script type="text/javascript" src="ext-3.0.3/ux/treegrideditor/plugins/TreeNodeChecked.js"></script>
+<script type="text/javascript" src="js/uploadPanel/uploadPanel.js"></script>
+<script type="text/javascript" src="js/uploadPanel/swfupload.js"></script>
+<script src="ext-3.0.3/PagingMemoryProxy.js" type="text/javascript" charset="utf-8"></script>
+<script src="ext-3.0.3/ItemSelector.js" type="text/javascript" charset="utf-8"></script>
+<script src="ext-3.0.3/ext-lang-zh_CN.js" type="text/javascript" charset="utf-8"></script>
+<script src="ext-3.0.3/uxvismode.js" type="text/javascript" charset="utf-8"></script>
+<script type="text/javascript" src="echarts/echarts.js"></script>
+<script type="text/javascript" src="DatePicker/WdatePicker.js"></script>
+
+<script type="text/javascript" src="ext-3.0.3/desktop/js/StartMenu.js"></script>
+<script type="text/javascript" src="ext-3.0.3/desktop/js/TaskBar.js"></script>
+<script type="text/javascript" src="ext-3.0.3/desktop/js/Desktop.js"></script>
+<script type="text/javascript" src="ext-3.0.3/desktop/js/App.js"></script>
+<script type="text/javascript" src="ext-3.0.3/desktop/js/Module.js"></script>
+
+<script type="text/javascript" src="ext-3.0.3/desktop/js/messageWindow.js"></script>
+<script type="text/javascript" src="ext-3.0.3/desktop/sample.js"></script>
+<script type="text/javascript" src="ext-3.0.3/utils.js"></script>
+<script type="text/javascript" src="modules/wcconf.js"></script>
+<script charset="utf-8" src="http://map.qq.com/api/js?v=2.exp"></script>
+<script type="text/javascript">
+var basePath = "${basePath}"; 
+var modules = "${codes}";
+modules = modules.split(",");
+//modules.push("AZ")
+
+ 
+//var modules = ["PERSON","ORGM","PERM","WXUSER","WXCONF","WXMENU","WXARTICAL","WXMR","WXER","WXWP","WCCONF","WCEN","WCEWM","WCPP","PRODUCT"];
+ 
+//var modules = ["PERSON","ORGM","PERM","WXUSER","WXCONF","WXMENU","WXARTICAL","WXMR","WXER","WXWP","WCCONF","WCEN","WCEWM","WCPP","PRODUCT","OPERCONF","WINERY","CATEGORY"];
+ 
+</script>
+<style type="text/css">
+.rowdisable{
+background-color: red;
+color:#fff;
+}   
+.x-date-picker{
+   width:175px;
+}  
+.x-grid-empty{text-align:center;font-size:14px;color:#333;}
+.t-red{color:#d41111;}
+</style>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>Insert title here</title>
+</head>
+<body >
+<div id="x-desktop">
+
+ 	<dl id="x-shortcuts" class="x-shortcuts">
+		<#list menus as menu>
+		    <dt id="${menu.code?upper_case}-win-shortcut">
+		       <a href="#" style='font-size: 12px;'> 
+		       <img src="ext-3.0.3/desktop/images/48_48/${menu.code?upper_case}.png"/><br>
+		       	${menu.name} </a>
+		  	</dt>
+		</#list> 
+   </dl>
+</div>
+<div id="ux-taskbar">
+	<div id="ux-taskbar-start"></div>
+	<div id="ux-taskbuttons-panel"></div>
+	<div class="x-clear"></div>
+</div>
+</body>
+</html>

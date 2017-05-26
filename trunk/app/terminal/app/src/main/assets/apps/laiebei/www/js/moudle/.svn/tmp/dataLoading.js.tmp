@@ -1,0 +1,57 @@
+/***************数据加载 控制*******************/
+
+/****
+ * 加载广告
+ */
+function loadAds(){
+	for(var i=0;i<4;i++){
+		var imgHtml = '<div class="swiper-slide">'+
+	                '<a href="javascript:void(0)" ><img src="img/pic'+(i+1)+'.png" width="100%"/></a>'+
+	            '</div>';
+		$("#scrollAds").append(imgHtml);
+	}
+	var mySwiper = new Swiper('#adLst',{
+        loop: true,
+        watchSlidesProgress : true,
+        watchSlidesVisibility : true,
+        pagination : '.swiper-pagination',
+        autoplay: 3000
+    });
+}
+var winLstSwiper = null;
+function loadWins(){
+	plus.master.Wines(function(result){
+	    var bindEl = $("#winLst>.swiper-wrapper");
+		var r = JSON.parse(result[0]);
+		if(r.success){
+		    bindEl.html("");
+		    var datas = r.rows;
+		    for(var i=0;i<datas.length;i++){
+                var d = datas[i];
+                var html='<div class="swiper-slide win">'+
+                    '<i class="winpic" style="background-image:url('+d.imgDetails+')"></i>'+
+                    '<div class="mid">'+
+                        '<div class="name f22">'+d.name+'</div>'+
+                        '<div class="memo">'+d.describe+'</div>'+
+                        '<div class="price f22 m-color">￥'+d.sellingPrice+'</div>'+
+                    '</div>'+
+                    '<div class="others">'+
+                        '<span class="left">门市价：￥'+d.originalPrice+'</span>'+
+                        '<span class="right">已卖出：<span class="m-color">'+d.sales+'两</span></span>'+
+                    '</div>'+
+                '</div>';
+                bindEl.append(html);
+            }
+            /*****
+             * 加载酒水列表左右滑动动效
+             */
+            winLstSwiper = new Swiper('#winLst', {
+                slidesPerView: 4,
+                paginationClickable: true,
+                spaceBetween: 15
+            });
+		}
+	}, function(result){
+		alert("获取酒列表信息错误")
+	});
+}

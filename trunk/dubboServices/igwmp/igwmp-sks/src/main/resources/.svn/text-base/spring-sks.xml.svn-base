@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?> 
+<beans xmlns="http://www.springframework.org/schema/beans" 
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:context="http://www.springframework.org/schema/context" 
+    xmlns:aop="http://www.springframework.org/schema/aop" 
+    xmlns:tx="http://www.springframework.org/schema/tx" 
+    xmlns:dubbo="http://code.alibabatech.com/schema/dubbo"
+    xsi:schemaLocation="http://www.springframework.org/schema/beans
+     http://www.springframework.org/schema/beans/spring-beans-4.0.xsd 
+	http://www.springframework.org/schema/context
+	http://www.springframework.org/schema/context/spring-context-4.0.xsd
+	http://www.springframework.org/schema/tx
+	http://www.springframework.org/schema/tx/spring-tx-4.0.xsd
+	http://www.springframework.org/schema/aop
+	http://www.springframework.org/schema/aop/spring-aop-4.0.xsd
+	http://code.alibabatech.com/schema/dubbo
+	http://code.alibabatech.com/schema/dubbo/dubbo.xsd">
+   <!-- 启用spring mvc 注解 -->
+    <context:annotation-config />
+   
+    <!-- 设置使用注解的类所在的jar包 -->
+    <context:component-scan base-package="com.emin.igwmp.skm" ></context:component-scan>
+    <aop:aspectj-autoproxy></aop:aspectj-autoproxy>
+	<aop:config proxy-target-class="false"></aop:config>
+
+	<!--Spring Socket  Start -->
+	<bean id="tcpServer" class="com.emin.igwmp.skm.core.netty.SocksServer" init-method="startServer" destroy-method="stopServer"/>
+
+
+	<!--Spring Netty  End -->
+	<!--定义Hibernate的事务管理器HibernateTransactionManager -->  
+
+	<!--<tx:annotation-driven transaction-manager="transactionManager" /> -->
+    <!-- DUBBO 扫描service服务 -->
+    <dubbo:application name="lms_wine" />
+	<dubbo:registry address="zookeeper://192.168.6.201:2181" file="dubbo-sks.cache" />
+	<dubbo:consumer timeout="10000" check="false"></dubbo:consumer><!-- 启动时不检查  -->
+	<!-- 扫描注解包路径，多个包用逗号分隔，不填pacakge表示扫描当前ApplicationContext中所有的类 -->
+	<dubbo:annotation  />
+	<!--<dubbo:protocol name="dubbo" port="20107"></dubbo:protocol>-->
+	<!--<dubbo:provider accesslog="true" timeout="10000" ></dubbo:provider>-->
+
+
+	
+
+    <!-- <mvc:interceptors>
+        <mvc:interceptor>  
+            <mvc:mapping path="/**/*.htm" />           
+            <bean class="com.emin.cis.util.AuthorizationInterceptor"></bean>  
+        </mvc:interceptor>  
+    </mvc:interceptors>  -->
+  </beans>

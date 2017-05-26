@@ -1,0 +1,91 @@
+.mui-content {
+	height: 100vh;
+	background-image: url("../../img/background1.png");
+	background-repeat: no-repeat;
+	background-size: cover;
+	z-index: 1;
+}
+
+div.g-earnings_time {
+	color: #999;
+	text-align: center;
+	width: 14vw;
+	height: 12.6vh;
+	line-height: 12.6vh;
+	font-size: .9rem;
+	/*border-bottom: 1px solid #EFE3CB;*/
+	background: #FFFBF2;
+}
+
+.mui-clearfix {
+	border-bottom: 1px solid #EFE3CB;
+}
+
+.mui-clearfix:nth-last-of-type(1) {
+	border-bottom: 0;
+}
+
+.g-earnings_content {
+	border-left: 1px solid #EFE3CB;
+	width: 85vw;
+	height: 12.6vh;
+	background: #FFFBF2;
+}
+
+.g-earnings_content .m-wine_name {
+	font-size: .9rem;
+	color: #555;
+	margin-top: 4vw;
+	display: flex;
+	justify-content: space-around;
+}
+
+.g-earnings_content .m-wine_name span {
+	font-size: .8rem;
+	color: #A6A3A2;
+}
+
+.g-earnings_content .m-wine_price {
+	color: #A6A3A2;
+	margin-top: 1vw;
+	font-size: 0.8rem;
+	display: flex;
+	justify-content: space-around;
+}
+
+.g-earnings_content .m-wine_price .u-wine_quanlity {
+	padding-left: 6vw;
+	background-image: url(../../img/gray_icon_wine.png);
+	background-size: contain;
+	background-position-x: 0vw;
+	background-repeat: no-repeat;
+}
+
+.g-earnings_content .m-wine_price .u-wine_total_price {
+	padding-left: 6vw;
+	background-image: url(../../img/gray_icon_money.png);
+	background-size: contain;
+	background-position-x: 0vw;
+	background-repeat: no-repeat;
+}
+
+.g-earnings_content .m-wine_price .u-wine_price {
+	padding-left: 6vw;
+	background-image: url(../../img/red_icon_money.png);
+	background-size: contain;
+	background-position-x: 0vw;
+	background-repeat: no-repeat;
+}
+
+.g-earnings_content .m-wine_price .u-wine_price {
+	color: #F04908;
+}
+
+.g-date_title {
+	padding: 4vw 0;
+	padding-left: 4vw;
+}
+
+.mui-scroll-wrapper {
+	margin-top: 8.6vh;
+}

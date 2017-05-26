@@ -1,0 +1,27 @@
+{
+    "wineInfo": [
+        {
+			"liquorId":"酒品识别码",
+			"creatTime":"建立时间",
+			"updateTime":"修改时间",
+            "cName":"酒品名称  来e杯酱香",
+			"flavor":"香型  酱香",
+			"degrees":"酒精度 54",
+			"cellar":"窖藏 5年",
+			"master":[{
+				"name":"大师名",
+				"hand":"头像地址",
+				"description":"描述"
+			}],
+			"production":[{
+				"name":"合作酒厂名",
+				"hand":"酒厂图片",
+				"contact":"联系方式",
+				"addr":"地址",
+				"description":"酒厂描述"
+			}],
+			"description":"描述 可以是酒厂地址 / 仁塔地址"
+        }
+       
+    ]
+}

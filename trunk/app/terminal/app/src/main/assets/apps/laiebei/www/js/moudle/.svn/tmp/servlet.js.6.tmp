@@ -1,0 +1,303 @@
+/***************页面跳转 控制*******************/
+
+/*******
+ * 跳转页面
+ * @param {Object} pageName 页面名称 
+ */
+function toPage(pageName){
+	var content = document.getElementsByClassName("main");
+	for(var i=0;i<content.length;i++){
+		var cur = content[i];
+		if(cur.getAttribute("id")==pageName&&cur.className.indexOf("hide")>=0){
+			cur.setAttribute("class",cur.className.replace(" hide"," animated fadeIn"))
+            setTimeout(function(){
+                cur.setAttribute("class",cur.className.replace(" animated fadeIn",""));
+            },1000);
+		}else{
+			if(cur.className.indexOf("hide")<0)
+			cur.setAttribute("class",cur.className+" hide");
+		}
+	}
+
+}
+
+/****
+ * 返回主页
+ */
+function backToIndex(){
+	controlInit();
+	$('.put-code').attr('phone',0)
+	toPage("index-moudle");
+}
+
+/*****
+ * 打开二维码收银台
+ */
+function openSettlementPopup(type,isEnable){
+	if(isEnable){
+		var titleEl = document.querySelectorAll("#scanCounter-popUp .pu-bar>span");
+		if(!type){
+			titleEl[0].innerHTML = "订单结算";
+	    	loadPayQrCode();
+		}else{
+			titleEl[0].innerHTML = "先尝后买";
+			loadTastingQrCode();
+		}
+	    var scanPopUp = document.getElementById("scanCounter-popUp");
+	    scanPopUp.setAttribute("class",scanPopUp.className.replace("hide",""));
+	    (document.querySelectorAll("#pay-code-info .pay-code"))[0].innerHTML = '<div class="loader-inner ball-spin-fade-loader">'+
+	      '<div></div>'+
+	      '<div></div>'+
+	      '<div></div>'+
+	      '<div></div>'+
+	      '<div></div>'+
+	      '<div></div>'+
+	      '<div></div>'+
+	      '<div></div>'+
+	    '</div>';
+	
+		var operEl = document.getElementById("pay-tip");
+		if(operEl.className.indexOf(" red-color")>=0){
+	        operEl.setAttribute("class",operEl.className.replace(" red-color",""));
+	        operEl.setAttribute("class",operEl.className+" blue-color");
+	    }
+	    operEl.innerHTML = "请使用微信支付 ...秒";
+	    var payMoneyEl = document.querySelectorAll("#pay-code-info .pay-money");
+	    payMoneyEl[0].innerHTML = "...";
+	    payMoneyEl[1].innerHTML = "...";
+	}else{
+		keyStatus = 0;
+		showAlert('该机器不可购买当前酒品')
+	}
+	
+}
+/***
+ * 二维码支付成功，显示打酒
+ */
+function loadServiceResult(){
+    /*var scanPopUp = document.getElementById("scanCounter-popUp");
+    scanPopUp.setAttribute("class",scanPopUp.className+" hide");*/
+    toPage('service-result-moudle');
+}
+
+/*****
+ * 打酒成功，完成服务
+ */
+function completeService(){
+	//隐藏加载中
+    var operEl = document.getElementById("service-loading");
+    if(operEl.className.indexOf("hide")<0){
+        operEl.setAttribute("class",operEl.className+" hide");
+    }
+    //显示出酒成功
+    operEl = document.getElementById("service-success");
+    if(operEl.className.indexOf("hide")>=0){
+        operEl.setAttribute("class",operEl.className.replace("hide",""));
+    }
+	setTimeout(function(){
+		console.log('返回倒计时')
+		backToIndex();//3秒后自动返回首页
+	},3000);
+}
+
+/********
+ * 跳转至酒品详情页
+ * @param {Object} self
+ */
+function toWinDetail(self){
+	var winLstIndex = self.getAttribute("win-lst-index");
+	loadWinDetail(globalWinLst[winLstIndex]);//加载酒品详情
+	toPage('win-detail-moudle');
+}
+/*进入服务员登录页*/
+function waiterLogin(){
+	var url = 'http://www.baidu.com';
+	toPage('waiter-login-moudle');
+	getDeviceQrcode(url);
+	$('.put-code').attr('phone','0')
+}
+
+/*****
+ * 显示代打酒列表
+ */
+function showServiceList(){
+	var waiter = document.getElementById("waiterLoginName").innerText;
+		//waiter = 18982282624;
+	if(!(/^1[34578]\d{9}$/.test(waiter))){ 
+        showAlert('手机号码错误，请重新输入！') 
+        keyStatus = 2;
+   }else{
+		loadReplaces(waiter);
+    }
+    hideKeyBord();
+}
+/*从代打酒列表输入打酒码*/
+function putCode(){
+	showKeybord(0,'outWin()');
+}
+
+/*分页函数*/
+function doListPage(pagerow,pagenum,rowcount,pagecount,preBtn,nxetBtn,d){
+	//参数依次为每一页显示的数目，当前页，数据总数，总页数，上一页，下一页，需要分页的数据
+    showPage(pagerow,pagenum,rowcount);
+    	preBtn.attr("disabled", true);
+   		preBtn.click(function(){
+    	nxetBtn.removeAttr("disabled");
+    	if((pagenum-1)<=1){
+        	pagenum = 1;
+        	preBtn.attr("disabled", true);
+    	}else{
+        	pagenum -= 1;
+        	preBtn.removeAttr("disabled");
+      } 
+      showPage(pagerow,pagenum,rowcount)
+     });
+     
+    nxetBtn.click(function(){
+    	preBtn.removeAttr("disabled");
+    	if ((pagenum + 1) >= pagecount){
+        	pagenum=pagecount;
+        	nxetBtn.attr("disabled", true);
+    	}else{
+        	pagenum += 1;
+        	nxetBtn.removeAttr("disabled");
+      	}
+      	showPage(pagerow,pagenum,rowcount)
+    });
+    
+    function showPage(pagerow,pagenum,rowcount){
+    	var temp='',
+        	html='';
+      	for(var i=0;i<pagerow;i++){
+        	temp=(pagenum-1)*pagerow+i;
+        	if(temp<rowcount){
+        		if(d[temp].enable){
+        			html+="<dl><dd>"+(temp+1)+"</dd><dd>"+d[temp].name+"</dd><dd>"+d[temp].quantity+"两</dd><dd>"+d[temp].table+"</dd><dd><div class='btn red-bg' code='"+d[temp].code+"' onclick='takeWine("+d[temp].code+",0,null)'>打酒</div></dd></dl>"
+        		}else{
+        			html+="<dl><dd>"+(temp+1)+"</dd><dd>"+d[temp].name+"</dd><dd>"+d[temp].quantity+"两</dd><dd>"+d[temp].table+"</dd><dd><div class='btn '  onclick='unableTakeWine()'>打酒</div></dd></dl>"
+        		}
+          		
+        	}
+		
+      	}
+      	
+
+      	serviceDataList.html(html)
+    }
+}
+
+function showWinLst(){
+	loadWins();
+	setTimeout(function(){
+		toPage('win-lst-moudle');
+	})
+	
+}
+//取酒
+function outWin(){
+	var code = document.getElementById("keybord-input").innerText,
+		waiter = $('.put-code').attr('phone')
+		num=1;
+	if(code=="请输入取酒码" || code==''){
+		keyStatus = 1;
+		showAlert('请输入取酒码')
+	}else{
+		takeWine(code,1,waiter);
+	}
+	hideKeyBord();
+}
+/*****
+ * 支付倒计时
+ */
+var initCountDown = 60;
+function countDownPay(type){
+	var operEl = document.getElementById("pay-tip");
+	initCountDown--;
+	if(initCountDown<=0){
+	    operEl.innerHTML = "二维码已过期，点击刷新";
+	    operEl.setAttribute("class",operEl.className.replace(" blue-color",""));
+	    operEl.setAttribute("class",operEl.className+" red-color");
+		operEl.onclick = function(){
+			openSettlementPopup(type,true);
+			operEl.click(function(){});
+		};
+		clearInterval(payInterval);
+		return false;
+	}
+    operEl.innerHTML = "请使用微信支付 "+initCountDown+"秒";
+}
+/*****
+ * 取消支付
+ */
+function cancelPay(){
+	clearInterval(payInterval);
+	var scanPopUp = document.getElementById("scanCounter-popUp");
+	scanPopUp.setAttribute("class",scanPopUp.className+" hide");
+}
+
+/********
+ * 支付成功
+ */
+function afterPay(){	
+	clearInterval(payInterval);
+	loadServiceResult();
+}
+/*提示用户，在当前用户不可取酒*/
+function unableTakeWine(){
+	keyStatus=0
+	showAlert('此种酒不可在当前酒柜取，请更换酒柜！')
+	setTimeout(function(){
+		hideAlert()
+	},3000)
+};
+/*去设置页面*/
+function toSetUpMoudle(){
+	toPage('set-up-moudle');
+	screenInit()
+}
+
+/*错误信息提示方法*/
+function errorAlert(code){
+	keyStatus = 0;
+	switch(code){
+		case -1:
+		showAlert("请输入正确的参数");
+		break;
+		case -2:
+		case -6:
+		case -1001:
+		case -1002:
+		case -1003:
+		case -1004:
+		case -1005:
+		showAlert("该机器没有配置该酒品");
+		break;
+		case -3:
+		case -4:
+		case -5:
+		showAlert("请输入正确的参数");
+		break;
+		case -7:
+		showAlert("网络连接错误");
+		break;
+		case -8:
+		showAlert("超时");
+		break;
+		case -100:
+		case -101:
+		case -102:
+		case -103:
+		showAlert("网络连接错误");
+		break;
+		case -1006:
+		case -1007:
+		showAlert("暂无提示信息");
+		break;
+		default:
+		showAlert("连接错误");
+		
+	}
+}
+
+
+

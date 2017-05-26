@@ -1,0 +1,83 @@
+.scale_panel {
+	color: #999;
+	width: 500px;
+	line-height: 18px;
+}
+
+.scale_panel .r {
+	float: right;
+}
+
+.scale span {
+	background-image: url(../img/scroll.png);
+	background-size: contain;
+	background-repeat:no-repeat ;
+	background-position: center;
+	width: 16px;
+	height: 16px;
+	position: absolute;
+	left: -5px;
+	top: -2px;
+	cursor: pointer;
+}
+
+.scale .markValue {
+	width: 40px;
+	height: 22px;
+	position: absolute;
+	border-radius: 6px;
+	top: 40px;	
+	left: -14px;
+	color: rgb(190,99,3);
+	font-size: 14px;
+	line-height: 22px;
+	text-align: center;
+	font-weight: bold;
+}
+
+.scale .markValue .trible {
+	width: 0;
+	height: 0;
+	position: absolute;
+	top: -14px;
+	left: 10px;
+	background: transparent;
+	border-right: 10px solid transparent;
+	border-left: 10px solid transparent;	
+	border-bottom: 14px solid rgb(251,192,48);
+}
+
+.scale {
+	background-repeat: repeat-x;
+	background-position: 0 100%;
+	background-color: rgb(18,91,161);
+	border-left: 1px #83BBD9 solid;
+	width: 500px;
+	height: 12px;
+	position: relative;
+	font-size: 0px;
+	border-radius: 6px;
+}
+
+.scale div {
+	background-repeat: repeat-x;
+	background-color: rgb(251,192,48);
+	width: 0px;
+	position: absolute;
+	height: 12px;
+	width: 0;
+	left: -1px;
+	bottom: 0;
+}
+.scale>div{
+	background-color:rgb(190,99,3) ;
+	border-radius: 6px;
+}
+
+.progress li {
+	font-size: 12px;
+	line-height: 50px;
+	position: relative;
+	height: 50px;
+	list-style: none;
+}

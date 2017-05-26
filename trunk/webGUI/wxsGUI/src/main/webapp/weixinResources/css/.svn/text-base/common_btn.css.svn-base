@@ -1,0 +1,25 @@
+#sure_btn {
+	background: linear-gradient(#F7A343, #C46110);
+}
+
+#sure_btn:active {
+	background: #C46110;
+}
+
+#next {
+	background: linear-gradient(#CA7D15, #9F3501);
+	color: #FDEAB2;
+}
+
+#next:active {
+	background: #9F3501;
+}
+
+#minus {
+	background: linear-gradient(#F8A442, #BE5907);
+	color: #FDEAB2;
+}
+
+#minus:active {
+	background: #BE5907;
+}

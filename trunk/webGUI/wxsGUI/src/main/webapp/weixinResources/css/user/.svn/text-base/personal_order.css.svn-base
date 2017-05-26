@@ -1,0 +1,145 @@
+body {
+	background: #1C1C1C;
+	display: -webkit-box;
+	display: -webkit-flex;
+	display: -ms-flexbox;
+	display: flex;
+	-webkit-box-pack: center;
+	-webkit-justify-content: center;
+	-ms-flex-pack: center;
+	justify-content: center;
+	-webkit-box-align: center;
+	-webkit-align-items: center;
+	-ms-flex-align: center;
+	align-items: center;
+}
+/*盒子的大小样式*/
+.wave_box {
+	width: 100vw;
+	height: 100vh;
+	background: #383A3F;
+	position: relative;
+	overflow: inherit;
+	-webkit-transform: translate3d(0, 0, 0);
+	transform: translate3d(0, 0, 0);
+	overflow: hidden;
+}
+
+.wave {
+	opacity: .8;
+	position: absolute;
+	top: 94%;
+	left: 6%;
+	background: #404247;
+	width: 1200px;
+	height: 1200px;
+	margin-left: -400px;
+	margin-top: -250px;
+	-webkit-transform-origin: 20% 80% 0%;
+	transform-origin: 20% 80% 0%;
+	border-radius: 43%;
+	-webkit-animation: drift 10000ms infinite linear;
+	animation: drift 10000ms infinite linear;
+}
+
+.wave.-two {
+	-webkit-animation: drift 12000ms infinite linear;
+	animation: drift 12000ms infinite linear;
+	opacity: .8;
+	background: #4c5057;
+}
+
+@
+-webkit-keyframes drift {from { -webkit-transform:rotate(0deg);
+	transform: rotate(0deg);
+}
+
+from {
+	-webkit-transform: rotate(360deg);
+	transform: rotate(360deg);
+}
+
+}
+@
+keyframes drift {from { -webkit-transform:rotate(0deg);
+	transform: rotate(0deg);
+}
+
+from {
+	-webkit-transform: rotate(360deg);
+	transform: rotate(360deg);
+}
+
+}
+.head_portrait {
+	margin-top: 6vh;
+	text-align: center;
+}
+
+.wave_box .head_portrait img {
+	width: 20vw;
+	height: 20vw;
+	border-radius: 50%;
+}
+
+.head_portrait .user_name {
+	color: #bebebf;
+	font-size: 1.2rem;
+	margin-top: 2vh;
+}
+
+.head_portrait .user_ware_num .u-left_part {
+	color: #999;
+	display: inline-block;
+	height: 6vh;
+	font-size: 1rem;
+	margin-top: 4vh;
+	padding-right: 4vw;
+	line-height: 3vh;
+	border-right: 1px #999 solid;
+}
+
+.head_portrait .user_ware_num .u-left_part .u-num {
+	font-size: 2rem;
+}
+
+.head_portrait .user_ware_num .u-left_part .u-wine_count {
+	position: absolute;
+	top: 34vh;
+	left: 28vw;
+}
+
+.head_portrait .user_ware_num a.u-right_part {
+	display: inline-block;
+	color: #d6922c;
+	font-size: 1rem;
+	padding-left: 4vw;
+	vertical-align: middle;
+}
+
+.wave_box .m-my_order {
+	position: absolute;
+	top: 60vh;
+	left: 14vw;
+	color: #555;
+}
+
+.wave_box img {
+	width: 30vw;
+	height: 30vw;
+}
+
+.wave_box .m-my_order p {
+	font-size: 1.4rem;
+}
+
+.wave_box .m-contact {
+	position: absolute;
+	top: 60vh;
+	right: 14vw;
+	color: #5f5f5f;
+}
+
+.wave_box .m-contact p {
+	font-size: 1.4rem;
+}

@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<style>
+			body{
+			margin: 0;
+			padding: 0;
+			}
+			
+			div.mask{
+				height: 100%;
+				width: 100%;
+				position:absolute;
+				z-index: 3;
+			}
+			
+			div.title{
+				font-size: 30px;
+				color: green;
+				position:absolute;
+				z-index: 2;
+				left: 0;
+				right: 0;
+				margin: 0 auto;
+				text-align: center;
+				}
+	     video.boot-video {
+			background-color: #CCCCCC;
+			height: 100%;
+			width: 100%;
+			position:absolute;
+			z-index: 1;
+		}
+		</style>
+		<script src="js/plugs/devices.js"></script>
+		<script src="js/plugs/adv.js"></script>
+		<script src="js/update.js"></script>
+		<script src="js/plugs/pluginCom.js"></script>
+	</head>
+	<body>
+			
+		<script>
+		
+		function openMainWindows(){
+			plus.com.cancelJob();//注销当前监听
+			mui.openWindow({
+					url: 'index.html',
+					id:'index'
+				});
+		}
+			
+		function getLogo(){
+			plus.adv.getBootLogo(function(result){
+				var url = result[0];
+				document.getElementById("player").innerHTML = '<video class="boot-video" id="video"   onended = "vedioEnd()">' +
+					'<source  src = ' + url + ' type="video/mp4" />' + '</video>';
+				setTimeout(function(){
+					var e = document.createEvent("MouseEvents");
+					e.initEvent("click", true, true);
+					document.getElementById("video").dispatchEvent(e);
+				},500);
+			},function(){
+				openMainWindows();
+			});
+		}
+		
+		//版本校验,APP UI
+		function validateVersion(){
+						
+			plus.runtime.getProperty(plus.runtime.appid,function(inf){
+			        var wgtVer=inf.version;
+			        console.log("当前UI应用版本："+wgtVer);
+			        
+			        //先保存版本号
+			        plus.devices.saveVer(function(result){
+			        	console.log("保存版本成功");
+			        },function(result){
+			        	console.log("保存版本失败");
+			        },wgtVer);
+			        
+			        plus.devices.validteUI(function(result){
+			        	console.log("验证UI版本成功");
+			        },function(result){
+			        	console.log("验证UI版本失败");
+			        },wgtVer);
+			        
+			        console.log("调用APP版本检测");
+					//开机检检测APP 版本
+					plus.devices.validateApp(function(result){
+						console.log("验证APP版本成功");
+					},function(result){
+						console.log("验证APP版本失败");
+					});
+			    });
+			
+			
+		}
+		
+		</script>
+		<div class="title">欢迎使用来e杯智能终端酒柜</div>
+		<div class="mask"></div>
+		
+		<div id="player"></div>
+		
+		<!--<video class="boot-video" id="video"   onended = "vedioEnd()">
+			<source id = "vediosource"  src = "" type="video/mp4" />
+		</video>-->
+		
+		<script src="js/mui.min.js"></script>
+		
+		<script>
+				
+			mui.init({
+				statusBarBackground: '#00f7f7f7'
+			});
+			
+			mui.plusReady(function() {
+				plus.navigator.setLogs(true);	
+				plus.navigator.closeSplashscreen()
+				plus.navigator.setFullscreen( true );
+				
+				console.log("调用版本验证开始   ");
+				validateVersion();
+				console.log("调用版本验证结束  ");
+				plus.com.createJob(function CommonCb(type,param){
+				 if(type == 1){//升级状态
+				 	var json = JSON.parse(param);
+				 	console.log("splash 接收到安装请求：网络地址:"  + json.url + "  安装地址:" + json.path);
+					installWgt(json.url,json.path);
+				}
+				
+			});
+				getLogo();
+			});
+			
+				
+			function vedioEnd(){
+				openMainWindows();
+			}
+	</script>
+		
+	</body>
+	
+</html>

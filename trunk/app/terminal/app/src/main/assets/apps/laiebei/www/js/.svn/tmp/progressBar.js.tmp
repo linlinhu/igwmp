@@ -1,0 +1,39 @@
+(function(){
+	var scale = function (btn,bar,title){
+		this.btn=document.getElementById(btn);
+		this.bar=document.getElementById(bar);
+		this.title=document.getElementById(title);
+		this.step=this.bar.getElementsByTagName("div")[0];
+		this.init();
+	};
+	scale.prototype={
+		init:function (){
+			var f=this,g=document,b=window,m=Math;
+			f.btn.ontouchstart=function (e){
+				var x= (e.touches[0]).pageX;
+				var l=this.offsetLeft;
+				var max=f.bar.offsetWidth-this.offsetWidth+10;
+				g.ontouchmove=function (e){
+				    e.preventDefault();
+					var thisX = (e.touches[0]).pageX;
+					var to=m.min(max,m.max(-2,l+(thisX-x)));
+
+					f.btn.style.left=(to-5)+'px';
+					f.ondrag(m.round(m.max(0,to/max)*100),to);
+					b.getSelection ? b.getSelection().removeAllRanges() : g.selection.empty();
+				};
+<<<<<<< .mine
+				g.ontouchend=new Function('this.ontouchmove=null');
+=======
+				g.ontouchend = new Function('this.ontouchmove=null');
+>>>>>>> .r1104
+			};
+		},
+		ondrag:function (pos,x){
+			this.step.style.width=Math.max(0,x)+'px';
+			this.title.innerHTML=pos+'%'+'<div class="trible"></div>';
+		}
+	}
+	new scale('btn_light','bar_light','title_light');
+	new scale('btn_voice','bar_voice','title_voice');
+})();

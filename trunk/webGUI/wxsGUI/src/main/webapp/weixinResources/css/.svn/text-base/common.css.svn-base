@@ -1,0 +1,99 @@
+body, .mui-content {
+	background-color: #000;
+	color: #fff;
+	margin: 0;
+	padding: 0;
+	font-family: "微软雅黑";
+}
+
+.mui-bar {
+	z-index: 0;
+}
+
+a.mui-icon {
+	color: white;
+}
+
+a.mui-icon-more {
+	transform: rotate(90deg);
+	-ms-transform: rotate(90deg);
+	/* IE 9 */
+	-moz-transform: rotate(90deg);
+	/* Firefox */
+	-webkit-transform: rotate(90deg);
+}
+
+.g-header_bg {
+	background: #383a3f;
+}
+
+h4 {
+	margin-top: 2vh;
+	height: 2.8vh;
+	padding-left: 1vh;
+	border-left: 1px solid white;
+}
+
+li {
+	list-style: none;
+<<<<<<< .mine
+}=======
+}
+
+.leb-loading {
+	display: none;
+	position: fixed;
+	top: 45vh;
+	left: 50vw;
+	width: 60px;
+	height: 60px;
+	z-index: 9999;
+	line-height: 17px;
+	-webkit-transition: opacity .3s;
+	transition: opacity .3s;
+	-webkit-transform: translate(-50%, 0);
+	transform: translate(-50%, 0);
+	opacity: .9;
+}
+
+.leb-loadding-message {
+	padding: 10px 25px;
+	text-align: center;
+	color: #fff;
+	border-radius: 6px;
+	background-color: #323232;
+}
+
+.leb-active {
+	display: block;
+	background-color: #323232;
+}
+
+.leb-svg-icon {
+	cursor: pointer;
+	position: fixed;
+	top: -1.5vh;
+	left: -2vw;
+}
+
+.leb-svg-icon path {
+	stroke: rgba(255, 255, 255, 0.78);
+	fill: none;
+	stroke-width: 5;
+	/*stroke-dasharray: 2000.50196075439453;*/
+	/*stroke-dashoffset: 2000.50196075439453;*/
+	-webkit-animation: leb-animate-path 3s 0.1s forwards;
+	animation: leb-animate-path 3s 0.1s forwards;
+}
+
+@-webkit-keyframes leb-animate-path {
+	to {
+		stroke-dashoffset: 0;
+	}
+}
+p
+@keyframes leb-animate-path {
+	to {
+		stroke-dashoffset: 0;
+	}
+}>>>>>>> .r1324

@@ -1,0 +1,61 @@
+10
+
+dir
+1496
+svn://192.168.0.3/igwmp/trunk/app/terminal/app/src/main/res
+svn://192.168.0.3/igwmp
+
+
+
+2017-04-19T11:24:13.398084Z
+1022
+yinds
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+338e4e0b-7b1a-4dcb-8384-9731ee3333ec
+
+values
+dir
+
+drawable
+dir
+
+drawable-hdpi
+dir
+
+drawable-xxhdpi
+dir
+
+anim
+dir
+
+drawable-ldpi
+dir
+
+drawable-mdpi
+dir
+
+raw
+dir
+
+drawable-xhdpi
+dir
+
+layout
+dir
+
+values-zh
+dir
+

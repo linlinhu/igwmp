@@ -1,0 +1,41 @@
+/*********
+ * 这是一个图标库样式类
+ * 声明原则:
+ * <icon class="图标类名"></icon>
+ * icon.图标类名{
+ * 		background-image: url(图标地址);
+ * }
+ * 不再此类中写除引入路径之外的其它样式
+ */
+
+icon{
+	display: block;
+	background-size: contain;
+	background-position: center;
+	background-repeat: no-repeat;
+}
+icon.logo{
+	background-image: url(../images/logo.png);
+}
+
+icon.login-left{
+	background-image: url(../images/loginLeft.png);
+}
+
+icon.user{
+	background-image: url(../images/user.png);
+}
+
+icon.pwd{
+	background-image: url(../images/pwd.png);
+}
+
+
+icon.unchecked{
+	background-image: url(../images/unchecked.png);
+}
+
+
+icon.checked{
+	background-image: url(../images/checked.png);
+}

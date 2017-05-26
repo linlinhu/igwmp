@@ -1,0 +1,294 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="utf-8">
+		<title>来e杯</title>
+		<meta name="viewport" content="width=device-width, initial-scale=1,maximum-scale=1, user-scalable=no">
+		<meta name="apple-mobile-web-app-capable" content="yes">
+		<meta name="apple-mobile-web-app-status-bar-style" content="black">
+		<link rel="stylesheet" href="css/mui.min.css">
+			
+			<style>
+			#qrcode {
+			  width:360px;
+			  height:360px;
+			  margin-top:15px;
+			}
+		</style>
+		
+		<style type="text/css">
+		.bad-video {
+			background-color: #CCCCCC;
+			height: 100%;
+			width: 100%;
+		}
+		</style>
+		
+		<script type="text/javascript" src="js/plugs/master.js"></script>
+		<script type="text/javascript" src="js/plugs/devices.js"></script>
+		<script type="text/javascript" src="js/plugs/adv.js"></script>
+		<script type="text/javascript" src="js/plugs/pluginCabinet.js"></script>
+		<script type="text/javascript" src="js/plugs/pluginOrder.js"></script>
+		<script type="text/javascript" src="js/jquery-2.1.1.min.js" ></script>
+		<script src="js/jquery.qrcode.min.js"></script>
+		<script type="text/javascript" charset="utf-8">
+/***************************终端测试接口调用*******************************/
+//取消浏览器的所有事件，使得active的样式在手机上正常生效
+document.addEventListener('touchstart',function(){
+    return false;
+},true);
+// 禁止选择
+document.oncontextmenu=function(){
+	return false;
+};
+// H5 plus事件处理
+var as='pop-in';// 默认窗口动画
+function plusReady(){
+	// 隐藏滚动条
+	plus.webview.currentWebview().setStyle({scrollIndicator:'none'});
+	// Android处理返回键
+	plus.key.addEventListener('backbutton',function(){
+		if(confirm('确认退出？')){
+			plus.runtime.quit();
+		}
+	},false);
+	compatibleAdjust();
+}
+if(window.plus){
+	plusReady();
+}else{
+	document.addEventListener('plusready',plusReady,false);
+}
+// DOMContentLoaded事件处理
+var _domReady=false;
+document.addEventListener('DOMContentLoaded',function(){
+	_domReady=true;
+	compatibleAdjust();
+},false);
+// 兼容性样式调整
+var _adjust=false;
+function compatibleAdjust(){
+	if(_adjust||!window.plus||!_domReady){
+		return;
+	}
+	_adjust=true;
+	// iOS平台特效
+	if('iOS'==plus.os.name){
+		document.getElementById('content').className='scontent';	// 使用div的滚动条
+		if(navigator.userAgent.indexOf('StreamApp')>=0){	// 在流应用模式下显示返回按钮
+			document.getElementById('back').style.visibility='visible';
+		}
+	}
+	// 预创建二级窗口
+//	preateWebviews();
+	// 关闭启动界面
+		plus.navigator.setStatusBarBackground('#D74B28');
+		if(plus.navigator.isImmersedStatusbar()){
+			plus.navigator.setStatusBarStyle('UIStatusBarStyleBlackOpaque');
+		}
+	setTimeout(function(){
+		plus.navigator.closeSplashscreen();
+	},200);
+}
+
+function showQrcode(url){
+	$('#qrcode').empty();
+	$('#qrcode').qrcode({width: 200,height: 200,text: url});
+}
+
+//获取终端关联信息
+function getRelation(){
+	plus.master.Relation(function(result){alert( result[0] );}, function(result){alert("关联信息获取错误")});
+}
+
+//获取终端关联信息
+function getWines(){
+	plus.master.Wines(function(result){alert( result[0] );}, function(result){alert("获取酒列表信息错误")});
+}
+
+//品酒
+function Tasting(id){
+	plus.master.Tasting(function(result){alert( result[0]);}, function(result){alert("品酒错误")},id);
+}
+
+//买酒
+function BuyWine(id,quantity,price){
+	plus.master.Buy(function(result){
+	var jsons = null;
+	console.log("接收到付款二维码：" + result[0]);
+	if(result[0]){
+		jsons = JSON.parse(result[0]);
+		
+	}
+	var show = document.getElementById('displayInfo');
+	show.value = jsons.rows.payQr;
+
+	showQrcode(jsons.rows.payQr);
+	}, function(result){alert("买酒错误")},id,quantity,price);
+}
+
+//取酒
+function TakeWine(code){
+	plus.master.Take(function(result){alert( result[0]);}, function(result){alert("取酒错误")},code);
+}
+
+function getReplaces(waiter){
+	plus.master.Replaces(function(result){alert( result[0]);}, function(result){alert("代打酒错误")},waiter);
+}
+
+function receiver(){ 
+	plus.Cabinet.createJob(function(result){
+		console.log("接收到酒柜出酒信息" + result);
+		var show = document.getElementById('displayInfo');
+		show.value = result;
+	});
+	plus.order.createJob(function(result){
+		console.log("接收到订单状态信息");
+		var show = document.getElementById('displayInfo');
+		show.value = result;
+	});
+}
+
+function clearCache(){
+	receiver();
+	plus.devices.clearCache(function(result){
+		var show = document.getElementById('displayInfo');
+		show.value = result[0];
+	},function(result){alert("缓存清除错误")});
+	
+}
+
+/**
+ * 说明：通知出酒  测试使用
+ * orderId：订单号  测试随意 
+ * channel：通道号  1-6
+ * value：出酒量  ml 20-2000
+ * */
+
+function vendout(orderId,channel, value){
+	receiver();
+	plus.devices.vendout(function(result){
+//		var show = document.getElementById('displayInfo');
+//		show.value = result[0];
+		
+	},function(result){
+//		var show = document.getElementById('displayInfo');
+//		show.value = result[0];
+	},orderId,channel,value);
+	
+}
+
+function getDeviceQrcode(url){
+	plus.devices.getQrcode(function(result){
+		console.log("获取机柜关联二维码成功:" + result[0]);
+		jsons = JSON.parse(result[0]);
+		document.getElementById('displayInfo').value = jsons.rows.url;
+		
+		showQrcode(jsons.rows.url);
+	},function(result){
+		console.log("获取机柜关联二维码错误:" + result[0]);
+		document.getElementById('displayInfo').value = result[0];
+	},url);
+}
+
+function showDialog(){
+	plus.devices.showDialog(function(result){
+		
+	},function(result){
+	});
+}
+
+function getAdv(){
+	plus.adv.getAwaitUrls(function(result){
+		console.log("广告数据:" + result[0]);
+	},function(result){
+		console.log("获取广告数据失败");
+	});
+}
+
+function upgradeTest(){
+	plus.devices.validateApp(function(result){
+		
+	},function(result){
+		
+	});
+}
+
+		</script>
+		<style type="text/css">
+			#list {
+				/*避免导航边框和列表背景边框重叠，看起来像两条边框似得；*/
+				margin-top: -1px;
+			}
+		</style>
+	</head>
+
+	<body>
+
+		<h4>来e杯</h4>
+		<button onclick="clearCache()">清除缓存</button>
+		<br />
+		<button onclick="getRelation()">设备关联信息</button>
+		<button onclick="getWines()">酒品列表</button>
+		<button onclick="showDialog()">弹出框</button>
+		<button onclick="getAdv()">广告</button>
+		<button onclick="upgradeTest()">升级测试</button>
+		<br />
+		<button onclick="Tasting(1111)">品酒</button>
+		<button onclick="BuyWine(41,document.getElementById('sellNumber').value,0.01)">买酒</button>
+		<button onclick="TakeWine(document.getElementById('takeNumber').value)">取酒</button>
+		<br />
+		<button onclick="getReplaces(document.getElementById('waiterNumber').value)">代打酒列表</button>
+		
+		<button onclick="vendout(123456,document.getElementById('channel').value,document.getElementById('sellNumber').value)">出酒</button>
+		<button onclick="getDeviceQrcode('http://ewm.emininfo.cn/wxs/wxservant/loginMachine.do')">二维码转换</button>
+		<!--
+        	http://ewm.emininfo.cn/wxs/wxservant/loginMachine.do?machineTag=123123
+        	http://weixin.qq.com/r/YjsFHU3E4BCfrQl_925w
+        -->
+		<br />
+		
+		<h5>购买量</h5><input type="text" id="sellNumber" value="50" />
+		<h5>通道</h5><input type="text" id="channel" value="5"/>
+		<h5>取酒码</h5><input type="text" id="takeNumber" value="234567"/>
+		<h5>服务员码</h5><input type="text" id="waiterNumber" value="182586814704"/>
+		<h5>信息展示</h5><input type="text" id="displayInfo" value="0"/>
+		
+		<div id="qrcode"></div>
+		
+		<!--<video class="bad-video" id="video" controls="controls">
+			<source src="file:///storage/emulated/0/laiebei/res/m.mp4" type="video/mp4" />
+		</video>-->
+		
+		<!--<video src="http://text.91lyb.com/download/vedios/laiebei_start.mp4" width="400" height="300"  id="video" controls="controls"></video>-->
+		<script src="js/mui.min.js"></script>
+		<!--<script src="js/mui.dtpicker.js"></script>-->
+		<!--<script src="js/update.js" type="text/javascript" charset="utf-8"></script>-->
+		
+		<script>
+//			alert("setLog");
+			mui.init({
+				statusBarBackground: '#00f7f7f7'
+			});
+//alert("setLog");
+//			plus.navigator.setLogs(true);
+			
+			
+			mui.plusReady(function() {
+				
+				plus.navigator.setLogs(true);
+			});
+			
+			
+			
+			
+			mui.back = function() {
+				plus.runtime.quit();
+			}
+					
+
+		</script>
+	</body>
+
+</html>

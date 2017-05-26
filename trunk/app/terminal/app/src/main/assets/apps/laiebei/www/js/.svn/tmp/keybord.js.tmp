@@ -1,0 +1,123 @@
+/****
+ * 键盘初始化事件
+ */
+$(function(){
+	var clicked = 0;
+	/*****
+	 * 键盘输入事件
+	 */
+	$("#keybord-pop-up dl.key>dd").click(function(){
+		if(clicked==0){
+			clicked = 1;
+			var defaultStr = $("#keybord-input").attr("default");
+			var inputContent = $("#keybord-input").html();
+			if(inputContent.indexOf(defaultStr)>=0){
+				inputContent = "";
+			}
+			inputContent += $(this).text();
+			if(inputContent.length>16){//最多输入16位
+				return false;
+			}
+			$("#keybord-input").html(inputContent);
+			setTimeout(function () { clicked = 0 }, 500);
+		}
+		var box_width=$(this).outerWidth(),
+			box_height=$(this).outerHeight(),
+			box_position=$(this).position(),
+			_left=box_position.left+(box_width/2)-33,
+			_top=box_position.top+(box_height/2)-33;
+		animateFun(_left,_top)
+	})
+
+	/******
+	 * 逐个删除输入内容
+	 */
+	$("#keybord-pop-up dd.delete").click(function(){
+		var defaultStr = $("#keybord-input").attr("default");
+		var inputContent = $("#keybord-input").html();
+		if(inputContent.indexOf(defaultStr)>=0){
+			return false;
+		}
+		inputContent = inputContent.length>1?inputContent.substring(0,inputContent.length-1):defaultStr;
+		$("#keybord-input").html(inputContent)
+	})
+
+	/*******
+	 * 清空键盘
+	 */
+	$("#keybord-pop-up dd.clear").click(function(){
+		var defaultStr = $("#keybord-input").attr("default");
+		$("#keybord-input").html(defaultStr);
+	})
+
+	$("#keybord-pop-up .close").click(function(){
+		$("#keybord-pop-up").addClass("hide");
+	})
+
+})
+
+/********
+ * 显示输入键盘
+ * @param {Object} type 类型 0打酒 2登录名输入
+ */
+function showKeybord(type,targetFunction){
+	if(!type||type==0){
+		$("#keybord-input").attr("default","请输入取酒码");
+		$("#keybord-input").html("请输入取酒码");
+		$("#keybord-confirm").html("打酒");
+		$("#keybord-confirm").attr("onclick",targetFunction);
+	}
+	if(type==1){
+		var defaultValue = $("#waiterLoginName").html();
+		$("#keybord-input").attr("default","请输入手机号码");
+		$("#keybord-input").html(defaultValue);
+		$("#keybord-confirm").html("确定");
+		$("#keybord-confirm").attr("onclick",targetFunction);
+	}
+	if($("#keybord-pop-up").hasClass("hide"))
+	$("#keybord-pop-up").removeClass("hide");
+}
+function hideKeyBord(){
+	if(!$("#keybord-pop-up").hasClass("hide"))
+	$("#keybord-pop-up").addClass("hide");
+}
+
+
+function inputWaiterLoginName(){
+	hideKeyBord();
+	$("#waiterLoginName").html($("#keybord-input").html());
+}
+
+//设置酒水两数
+function setWinCount(winCount){
+	$("#win-buy-count").html(winCount+"两");
+	$("#win-buy-count").attr("win-count",winCount);
+}
+
+//酒水两数加一
+function plusWinCount(){
+	var winCount = parseInt($("#win-buy-count").attr("win-count"));
+	var plusCount = winCount+1;
+	if(plusCount>10) plusCount=10;
+	$("#win-buy-count").html(plusCount+"两");
+	$("#win-buy-count").attr("win-count",plusCount);
+}
+
+//酒水两数减一
+function subWinCount(){
+	var winCount = parseInt($("#win-buy-count").attr("win-count"));
+	var subCount = winCount-1;
+	if(subCount<=0) subCount=1;
+	$("#win-buy-count").html(subCount+"两");
+	$("#win-buy-count").attr("win-count",subCount);
+}
+//loader_animate定位
+function animateFun(left,top){
+	var loader=document.getElementById('loader_animate');
+	loader.style.display='block';
+	loader.style.left=left+'px';
+	loader.style.top=top+'px';
+	setTimeout (function(){
+		loader.style.display='none'
+	},500)
+}

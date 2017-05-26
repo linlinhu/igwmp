@@ -1,0 +1,332 @@
+/***************数据加载 控制*******************/
+
+/****
+ * 加载广告
+ */
+function loadAds(){
+	for(var i=0;i<4;i++){
+		var imgHtml = '<div class="swiper-slide">'+
+	                '<a href="javascript:void(0)" ><img src="img/pic'+(i+1)+'.png" width="100%"/></a>'+
+	            '</div>';
+		$("#scrollAds").append(imgHtml);
+	}
+	var mySwiper = new Swiper('#adLst',{
+        loop: true,
+        watchSlidesProgress : true,
+        watchSlidesVisibility : true,
+        pagination : '.swiper-pagination',
+        autoplay: 3000
+    });
+}
+var winLstSwiper = null;
+function loadWins(){
+	plus.master.Wines(function(result){
+	    var bindEl = $("#winLst>.swiper-wrapper");
+		var r = JSON.parse(result[0]);
+		if(r.success){
+		    bindEl.html("");
+		    globalWinLst = r.rows;
+		    for(var i=0;i<globalWinLst.length;i++){
+                var d = globalWinLst[i];
+                var html='<div class="swiper-slide win" win-lst-index="'+i+'" onclick="toWinDetail(this)">'+
+                    '<i class="winpic" style="background-image:url('+d.imgList+')"></i>'+
+                    '<div class="mid">'+
+                        '<div class="name f22">'+d.name+'</div>'+
+                        '<div class="memo">'+d.describe+'</div>'+
+                        '<div class="price f22 m-color">￥'+d.sellingPrice+'</div>'+
+                    '</div>'+
+                    '<div class="others">'+
+                        '<span class="left">门市价：￥'+d.originalPrice+'</span>'+
+                        '<span class="right">已卖出：<span class="m-color">'+d.sales+'两</span></span>'+
+                    '</div>'+
+                '</div>';
+                bindEl.append(html);
+            }
+            /*****
+             * 加载酒水列表左右滑动动效
+             */
+            winLstSwiper = new Swiper('#winLst', {
+                slidesPerView: 4,
+                paginationClickable: true,
+                spaceBetween: 15
+            });
+		}
+	}, function(result){
+		alert("获取酒列表信息错误")
+	});
+}
+
+/*****
+ * 加载酒精详情
+ * @param {Object} win
+ */
+function loadWinDetail(win){
+	var winId = win.id,
+	    winName = win.name,
+	    winImg = win.imgDetails,
+	    winSellPrice = win.sellingPrice,
+	    winOrgPrice = win.originalPrice,
+	    winSales = win.sales,
+	    winFlavor = win.flavor,
+	    winDegress = win.degress,
+	    winProduct = win.product;
+
+	$("#win-detail-moudle").attr("data-id",winId);
+	$("#win-detail-moudle").attr("data-price",winSellPrice);
+	var bindEl = $("#win-detail-moudle>.info");
+	var html = '<i class=" win-detail" style="background-image:url('+winImg+')"></i>'+
+	'<div class="ln50">'+
+		'<span class="f22">'+winName+'</span>'+
+		'<span class="f22 m-color">￥'+winSellPrice+'</span>'+
+		'<span>门市价：￥'+winOrgPrice+'</span>'+
+		'<span>已卖出：<span class="m-color">'+winSales+'两</span></span>'+
+	'</div>'+
+	'<div class="ln30">'+
+		'<span>香型：'+winFlavor+'</span>'+
+		'<span>酒精度：'+winDegress+'度</span>'+
+		'<span>产地：'+winProduct+'</span>'+
+	'</div>';
+	bindEl.html(html);
+
+	$("#pay-confirm-info").html('<div class="bot-line">'+
+        '<div class="f22">'+winName+'</div>'+
+        '<div class="ln50"><span style="float: left;">'+winDegress+'度</span><span style="float: right;">'+winFlavor+'</span></div>'+
+        '<div class="f22" style="text-align: right;border-bottom: 2px solid rgb(169,198,255);">￥'+winSellPrice+'元 * <span class="pay-count">1</span>两</div>'+
+        '<div class="f22 red-color" style="text-align: right;">实付款：<span class="pay-money">0.1</span>元</div>'+
+    '</div>');
+}
+
+/*
+ 代打酒
+ */
+function loadReplaces(waiter){
+	plus.master.Replaces(function(result){
+		var r = JSON.parse(result[0]);
+		if(r.success){
+			$('#waiterLoginName').text('')
+			var d = r.rows,
+				len = d.length,
+				rowcount = len,//数据总数
+				pagerow = 5,//每一页显示的数目
+		        pagenum = 1,//当前页
+		        pagecount = Math.ceil(rowcount/pagerow);//总页数
+				html = '',
+				serviceDataList = $('#service-data-lst'),
+				preBtn = $("#service-lst-pre-btn"),//上一页
+    			nxetBtn = $("#service-lst-next-btn");//下一页
+			serviceDataList.html('');
+			if(len>0){
+				console.log(len)
+				doListPage(pagerow,pagenum,rowcount,pagecount,preBtn,nxetBtn,d)
+				/*从代打酒列表进入打酒程序*/
+				$('#service-data-lst .red-bg').click(function(){
+					var code = $(this).attr('code')
+				    takeWine(code,0);
+				})				
+			}else{
+				serviceDataList.append('<dl><dd>暂无数据</dd></dl>')
+			}	
+		}else{
+			alert('用户不存在或者手机号错误')
+		}
+	}, function(result){alert("代打酒错误")},waiter);
+}
+
+/********
+ * 加载支付二维码及支付信息
+ */
+function loadPayQrCode(){
+	var winId = $("#win-detail-moudle").attr("data-id");
+	var winPrice = $("#win-detail-moudle").attr("data-price");
+	var winCount = $("#win-buy-count").attr("win-count");
+	var payPrice = winCount*winPrice;//支付价格
+	$("#pay-confirm-info .pay-count").html(winCount);
+	$("#pay-confirm-info .pay-money").html(payPrice);
+	plus.master.Buy(function(result){
+		var r = JSON.parse(result[0]);
+		if(r.success){
+			var d = r.rows;
+			$("#pay-code-info .pay-money").html(d.pay);
+			$("div.pay-code").html("");
+			$("div.pay-code").qrcode({ 
+			    render: "table", //table方式 
+			    width: $("div.pay-code").width(), //宽度 
+			    height:$("div.pay-code").height(), //高度 
+			    text: d.payQr
+			}); 
+			initCountDown = 60;
+			payInterval = setInterval("countDownPay(0)",1000);
+			//payListener();//支付监听
+		}
+	}, function(result){alert("买酒错误")},winId,winCount,payPrice);
+
+}
+/****
+ * 支付监听
+ */
+function payListener(){
+	plus.order.createJob(function(result){
+		var alertForm = $('#alert-form'),
+			close = $('.close',alertForm),
+			r = JSON.parse(result);
+		if(r.success){
+			takeWinListener();
+		}else{
+			showAlert('支付失败！') 
+		}
+		close.on('click',function(){
+			hideAlert()
+		})
+	});
+}
+/*******
+ * 加载先品后买二维码
+ */
+function loadTastingQrCode(){
+	var winId = $("#win-detail-moudle").attr("data-id");
+	$("#pay-confirm-info .pay-count").html("...");
+	plus.master.Tasting(function(result){
+		var r = JSON.parse(result[0]);
+		if(r.success){
+			var d = r.rows;
+			$("#pay-confirm-info .pay-money").html(d.pay);
+			$("#pay-code-info .pay-money").html(d.pay);
+			$("div.pay-code").html("");
+			$("div.pay-code").qrcode({ 
+			    render: "table", //table方式 
+			    width: $("div.pay-code").width(), //宽度 
+			    height:$("div.pay-code").height(), //高度 
+			    text: d.payQr
+			}); 
+			initCountDown = 60;
+			payInterval = setInterval("countDownPay(1)",1000);
+			payListener();
+		}
+	}, function(result){alert("买酒错误")},winId);
+}
+
+/*取酒请求*/
+//num：1 表示散客打酒，num：0 表示服务员打酒
+function takeWine(code,num){
+	plus.master.Take(function(result){
+		var r = JSON.parse(result[0]);
+		if(r.success){
+			vendout(312321,1, 200)
+//			serviceWinOut(); 显示正在出酒
+		}else{
+			showAlert('取酒码错误')
+		}
+		hideKeyBord();
+<<<<<<< .mine
+		close.on('click',function(){
+			hideAlert()
+			if(num==1){
+				//showKeybord(0,'outWin()')
+			}
+			
+		})
+=======
+
+//		$('#alert-form .close'),click(function(){
+//			hideAlert()
+//			    alert(num+"~~~~~~~~~~~~~~");
+//			if(num){
+//			    alert(num);
+//				showKeybord(0,'outWin()')
+//			}
+//		})
+>>>>>>> .r1281
+	}, function(result){alert("取酒错误")},code);
+}
+/*出酒监听 */
+var takeWin = false;
+function takeWinListener(){
+	plus.Cabinet.createJob(function(result){
+		var r = JSON.parse(result);
+		if(r.success){
+		    var status = r.rows.status,
+			resultCode =r.rows.resultCode;
+			switch(status){
+				case 1:
+				//showAlert('出酒准备');
+				break;
+				case 2:
+				//hideAlert()
+				if(!takeWin){
+					takeWin = true;
+					serviceWinOut();
+				}
+				break;
+				case 3:
+				completeService()
+				takeWin = false;
+				break;
+				case 4:
+				switch(resultCode){
+					case 49:
+					showAlert('机器配置错误');
+					break;
+					case 50:
+					showAlert('模式错误');
+					break;
+					case 51:
+					showAlert('通道号越界');
+					break;
+					case 52:
+					showAlert('出酒量越界');
+					break;
+					case 65:
+					showAlert('机器故障');
+					break;
+					case 66:
+					showAlert('售空');
+					break;
+					case 81:
+					showAlert('超时');
+					break;
+					default:
+					showAlert('出酒失败');
+				}
+				break;
+				default:
+				;
+			}
+		}else{
+			showAlert('连接失败');
+			var code = r.code
+			switch(code){
+				case -7:
+				showAlert('订单校验错误，该订单已经出过酒');
+				break;
+				case -3:
+				showAlert('参数上溢')
+				serviceWinOut();
+				break;
+				case -4:
+				showAlert('参数下溢')
+				break;
+				case -6:
+				showAlert('调用酒柜错误');
+				break;
+				default:
+				;
+			}
+		}
+	});
+}
+/*
+ * 出酒信息
+ * 说明：通知出酒  测试使用
+ * orderId：订单号  测试随意 
+ * channel：通道号  1-6
+ * value：出酒量  ml 20-2000
+ * */
+function vendout(orderId,channel, value){
+	takeWinListener();
+	plus.devices.vendout(function(result){
+		
+	},function(result){
+
+	},orderId,channel,value);
+	
+}

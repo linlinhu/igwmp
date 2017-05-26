@@ -1,0 +1,170 @@
+/***************数据加载 控制*******************/
+
+/****
+ * 加载广告
+ */
+function loadAds(){
+	for(var i=0;i<4;i++){
+		var imgHtml = '<div class="swiper-slide">'+
+	                '<a href="javascript:void(0)" ><img src="img/pic'+(i+1)+'.png" width="100%"/></a>'+
+	            '</div>';
+		$("#scrollAds").append(imgHtml);
+	}
+	var mySwiper = new Swiper('#adLst',{
+        loop: true,
+        watchSlidesProgress : true,
+        watchSlidesVisibility : true,
+        pagination : '.swiper-pagination',
+        autoplay: 3000
+    });
+}
+var winLstSwiper = null;
+function loadWins(){
+	plus.master.Wines(function(result){
+	    var bindEl = $("#winLst>.swiper-wrapper");
+		var r = JSON.parse(result[0]);
+		if(r.success){
+		    bindEl.html("");
+		    globalWinLst = r.rows;
+		    for(var i=0;i<globalWinLst.length;i++){
+                var d = globalWinLst[i];
+                var html='<div class="swiper-slide win" win-lst-index="'+i+'" onclick="toWinDetail(this)">'+
+                    '<i class="winpic" style="background-image:url('+d.imgList+')"></i>'+
+                    '<div class="mid">'+
+                        '<div class="name f22">'+d.name+'</div>'+
+                        '<div class="memo">'+d.describe+'</div>'+
+                        '<div class="price f22 m-color">￥'+d.sellingPrice+'</div>'+
+                    '</div>'+
+                    '<div class="others">'+
+                        '<span class="left">门市价：￥'+d.originalPrice+'</span>'+
+                        '<span class="right">已卖出：<span class="m-color">'+d.sales+'两</span></span>'+
+                    '</div>'+
+                '</div>';
+                bindEl.append(html);
+            }
+            /*****
+             * 加载酒水列表左右滑动动效
+             */
+            winLstSwiper = new Swiper('#winLst', {
+                slidesPerView: 4,
+                paginationClickable: true,
+                spaceBetween: 15
+            });
+		}
+	}, function(result){
+		alert("获取酒列表信息错误")
+	});
+}
+
+/*****
+ * 加载酒精详情
+ * @param {Object} win
+ */
+function loadWinDetail(win){
+	var winId = win.id,
+	    winName = win.name,
+	    winImg = win.imgDetails,
+	    winSellPrice = win.sellingPrice,
+	    winOrgPrice = win.originalPrice,
+	    winSales = win.sales,
+	    winFlavor = win.flavor,
+	    winDegress = win.degress,
+	    winProduct = win.product;
+
+	$("#win-detail-moudle").attr("data-id",winId);
+	$("#win-detail-moudle").attr("data-price",winSellPrice);
+	var bindEl = $("#win-detail-moudle>.info");
+	var html = '<i class=" win-detail" style="background-image:url('+winImg+')"></i>'+
+	'<div class="ln50">'+
+		'<span class="f22">'+winName+'</span>'+
+		'<span class="f22 m-color">￥'+winSellPrice+'</span>'+
+		'<span>门市价：￥'+winOrgPrice+'</span>'+
+		'<span>已卖出：<span class="m-color">'+winSales+'两</span></span>'+
+	'</div>'+
+	'<div class="ln30">'+
+		'<span>香型：'+winFlavor+'</span>'+
+		'<span>酒精度：'+winDegress+'度</span>'+
+		'<span>产地：'+winProduct+'</span>'+
+	'</div>';
+	bindEl.html(html);
+
+	$("#pay-confirm-info").html('<div class="bot-line">'+
+        '<div class="f22">'+winName+'</div>'+
+        '<div class="ln50"><span style="float: left;">'+winDegress+'度</span><span style="float: right;">'+winFlavor+'</span></div>'+
+        '<div class="f22" style="text-align: right;border-bottom: 2px solid rgb(169,198,255);">￥'+winSellPrice+'元/<span class="pay-count">1</span>两</div>'+
+        '<div class="f22 red-color" style="text-align: right;">实付款：<span class="pay-money">0.1</span>元</div>'+
+    '</div>');
+}
+
+/*
+ 代打酒
+ */
+function LoadReplaces(waiter){
+	plus.master.Replaces(function(result){
+		var r = JSON.parse(result[0]);
+		if(r.success){
+			$('#waiterLoginName').text('')
+			var d = r.rows,
+				len = d.length,
+				rowcount = len,//数据总数
+				pagerow = 5,//每一页显示的数目
+		        pagenum = 1,//当前页
+		        pagecount = Math.ceil(rowcount/pagerow);//总页数
+				html = '',
+				serviceDataList = $('#service-data-lst'),
+				preBtn = $("#service-lst-pre-btn"),//上一页
+    			nxetBtn = $("#service-lst-next-btn");//下一页
+			serviceDataList.html('');
+			if(len>0){
+				console.log(len)
+				doListPage(pagerow,pagenum,rowcount,pagecount,preBtn,nxetBtn,d)
+			}else{
+				serviceDataList.append('<dl><dd>暂无数据</dd></dl>')
+			}	
+		}else{
+			alert('用户不存在或者手机号错误')
+		}
+	}, function(result){alert("代打酒错误")},waiter);
+}
+
+<<<<<<< .mine
+=======
+/********
+ * 加载支付二维码及支付信息
+ */
+>>>>>>> .r1127
+function loadPayQrCode(){
+	var winId = $("#win-detail-moudle").attr("data-id");
+	var winPrice = $("#win-detail-moudle").attr("data-price");
+	var winCount = $("#win-buy-count").attr("win-count");
+	var payPrice = winCount*winPrice;//支付价格
+	$("#pay-confirm-info .pay-count").html(winCount);
+	$("#pay-confirm-info .pay-money").html(payPrice);
+	plus.master.Buy(function(result){
+		var r = JSON.parse(result[0]);
+		if(r.success){
+			var d = r.rows;
+			$("#pay-code-info .pay-money").html(d.pay);
+			$("div.pay-code").html("");
+			$("div.pay-code").qrcode({ 
+			    render: "table", //table方式 
+			    width: $("div.pay-code").width(), //宽度 
+			    height:$("div.pay-code").height(), //高度 
+			    text: d.payQr
+			}); 
+			payInterval = setInterval("countDownPay()",1000);
+		}
+	}, function(result){alert("买酒错误")},winId,winCount,payPrice);
+
+}
+/*取酒请求*/
+function takeWine(code){
+	plus.master.Take(function(result){
+		var r = JSON.parse(result[0])
+		if(r.success){
+			alert('取酒码验证成功');
+			serviceWinOut();
+		}
+	}, function(result){alert("取酒错误")},code);
+}
+

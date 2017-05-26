@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="UTF-8"?> 
+<beans xmlns="http://www.springframework.org/schema/beans" 
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:context="http://www.springframework.org/schema/context" 
+    xmlns:aop="http://www.springframework.org/schema/aop" 
+    xmlns:tx="http://www.springframework.org/schema/tx" 
+    xmlns:mvc="http://www.springframework.org/schema/mvc"
+    xmlns:dubbo="http://code.alibabatech.com/schema/dubbo"
+    xmlns:util="http://www.springframework.org/schema/util"
+    xsi:schemaLocation="http://www.springframework.org/schema/beans 
+     http://www.springframework.org/schema/beans/spring-beans-4.0.xsd 
+http://www.springframework.org/schema/context 
+http://www.springframework.org/schema/context/spring-context-4.0.xsd 
+http://www.springframework.org/schema/tx 
+http://www.springframework.org/schema/tx/spring-tx-4.0.xsd 
+http://www.springframework.org/schema/aop 
+http://www.springframework.org/schema/aop/spring-aop-4.0.xsd
+http://www.springframework.org/schema/mvc
+http://www.springframework.org/schema/mvc/spring-mvc-4.0.xsd
+http://code.alibabatech.com/schema/dubbo       
+http://code.alibabatech.com/schema/dubbo/dubbo.xsd
+">
+   <!-- 启用spring mvc 注解 -->
+    <context:annotation-config />
+   
+    <!-- 设置使用注解的类所在的jar包 -->
+    <context:component-scan base-package="com.emin" ></context:component-scan>
+    <aop:aspectj-autoproxy proxy-target-class="true"></aop:aspectj-autoproxy>
+	<aop:config proxy-target-class="false"></aop:config>
+	<bean id="springContextHolder" class="com.emin.base.util.SpringContextHolder"></bean>
+	<bean id="placeholderConfig" class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
+		<property name="location" value="classpath:/db.properties" />	
+	</bean> 
+	<bean id="dataSource" class="com.mchange.v2.c3p0.ComboPooledDataSource" >
+		<property name="driverClass" value="${db.driverClass}" />
+		<property name="jdbcUrl" value="${db.plt.baseUrl}/${db.plt.name}" />
+		<property name="user" value="${db.plt.user}" />
+		<property name="password" value="${db.plt.password}" />
+		<property name="minPoolSize" value="${db.minPoolSize}" />
+		<property name="maxPoolSize" value="${db.maxPoolSize}" />
+		<property name="initialPoolSize" value="${db.initialPoolSize}" />
+		<property name="maxIdleTime" value="${db.maxIdleTime}" />
+		<property name="acquireIncrement" value="${db.acquireIncrement}" />
+		<property name="maxStatements" value="${db.maxStatements}" />
+		<property name="idleConnectionTestPeriod" value="${db.idleConnectionTestPeriod}" />
+		<property name="acquireRetryAttempts" value="${db.acquireRetryAttempts}" />
+		<property name="breakAfterAcquireFailure" value="${db.breakAfterAcquireFailure}" />
+		<property name="testConnectionOnCheckout" value="${db.testConnectionOnCheckout}" />
+	</bean>
+	 
+	 
+	<bean class="org.springframework.dao.annotation.PersistenceExceptionTranslationPostProcessor" />
+	
+	
+	<bean id="jdbcTemplate"  
+        class="org.springframework.jdbc.core.JdbcTemplate">  
+        <property name="dataSource" ref="dataSource" />  
+    </bean> 	
+
+	  <!--定义Hibernate的事务管理器HibernateTransactionManager -->  
+    <bean id="transactionManager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager">  
+        <!-- 依赖注入上面定义的sessionFactory -->  
+        <property name="dataSource" ref="dataSource"/> 
+    </bean> 
+	<tx:annotation-driven transaction-manager="transactionManager" /> 
+	
+	
+    <bean id="coreDao" class="com.jnc.jvc.dao.CoreDaoImpl"></bean>
+	
+    <!-- DUBBO 扫描service服务 -->
+    <dubbo:application name="igwmp-rp" />
+    <!-- 	 zookeeper://192.168.6.201:2181"  zookeeper://192.168.0.222:2181 -->
+	<dubbo:registry address="zookeeper://192.168.6.201:2181"   file="dubbo-rp.cache" />
+	<dubbo:consumer timeout="10000"  check="false"></dubbo:consumer><!-- 启动时不检查  -->
+	<!-- 扫描注解包路径，多个包用逗号分隔，不填pacakge表示扫描当前ApplicationContext中所有的类 -->
+	<dubbo:annotation package="com.emin.igwmp.rp.facade" />
+	<dubbo:protocol name="dubbo" port="20110"></dubbo:protocol>	
+	<dubbo:provider accesslog="true" timeout="10000" ></dubbo:provider>
+	 
+  </beans>

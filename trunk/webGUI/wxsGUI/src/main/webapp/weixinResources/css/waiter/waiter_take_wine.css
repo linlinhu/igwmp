@@ -1,0 +1,195 @@
+.mui-content {
+				height: 100vh;
+				background-image: url("../../img/background1.png");
+				background-repeat: no-repeat;
+				background-size: cover;
+				z-index: 1;
+			}
+			
+			.mui-plus.mui-android header.mui-bar {
+				display: none;
+			}
+			
+			.mui-plus.mui-android .mui-bar-nav~.mui-content {
+				padding: 0;
+			}
+			
+			/*hm开头的表示仅为 Hello MUI示例定义*/			
+			.hm-description {
+				margin: .5em 0;
+			}
+			
+			.hm-description>li {
+				font-size: 14px;
+				color: #8f8f94;
+			}
+			
+			.mui-control-content {
+				min-height: 44px;
+			}
+			
+			.mui-control-content .mui-loading {
+				margin-top: 50px;
+			}
+			
+			.mui-scroll-wrapper {
+				/*margin-top: -1vh;*/
+				/*border: 1px solid yellowgreen;*/
+				position: absolute;
+				top: 44px;
+				height: 93vh;
+			}
+			
+			.mui-card {
+				border-top: #E1E1E1 solid 1px;
+				border-bottom: #E1E1E1 solid 1px;
+				margin: 0;
+				margin-top: 2vh;
+				background: #FFFBF2;
+			}
+			
+			.mui-card-header.mui-card-media .mui-media-body {
+				margin-left: 0;
+				color: #646464;
+				font-size: 1rem;
+				/*font-weight: bold;*/
+			}
+			
+			.mui-card-header.mui-card-media {
+				padding: 15px;
+			}
+			
+			.mui-segmented-control {
+				border-color: #C9933D;
+				position: fixed;
+				top: 0;
+				z-index: 999;
+			}
+			
+			.mui-segmented-control .mui-control-item {
+				color: #EADAA7;
+				border-color: #F4581D;
+				background: #E94707;
+			}
+			
+			.mui-segmented-control .mui-control-item.mui-active {
+				color: #D5C283;
+				background: #F4581D;
+			}
+			
+			.mui-card-content-inner {
+				padding: 0;
+			}
+			
+			.mui-card-content-inner img {
+				width: 20vw;	
+			}
+			
+			.mui-slider .mui-slider-group .mui-slider-item img {
+				width: 26vw;
+				padding-left: 4vw;
+				margin-right: 4vw;
+				height: 26vw;
+				margin-top: 4vh;
+			}
+			
+			.m-wine_info {
+				
+				margin-top: 2vh;
+				min-width: 66vw;
+				margin-right: 4vw;
+				border-bottom: 1px solid #E1E1E1;
+				/*font-weight: bold;*/
+			}
+			
+			.u-wine_name {
+				font-size: 1rem;
+				color: #303030;
+			}
+			
+			.m-get_wine_code {
+				margin-left: 30vw;
+				margin-top: 1vh;
+				margin-bottom: 1vh;
+			}
+			
+			.m-get_wine_code p {
+				/*font-weight: bold;*/
+				font-size: .8rem;
+			}
+			
+			.m-get_wine_code p span {
+				font-size: .9rem;
+				color: #303030;
+			}
+			
+			.u-color_red {
+				color: #EA4F14;
+			}
+			
+			.u-wait_wine_info {
+				font-size: .8rem;
+			}
+			/*第一个顶在头部*/
+			
+			.g-first {
+				margin-top: 0;
+			}
+			/*完成部分*/
+			
+			#scroll2 .m-wine_info {
+				margin-top: 2vh;
+				width: 58vw;
+				/*font-weight: bold;*/
+				border: 0;
+			}
+			
+			.mui-search {
+				background: #FFFBF2;
+				text-align: center;
+			}
+			
+			#scroll2 .mui-scroll {
+				height: 0;
+			}
+			
+			#scroll2 input[type=search] {
+				width: 90vw;
+				margin-top: 3vw;
+				background: rgba(255, 255, 255, .6);
+				border: 1px solid #F8F7F5;
+			}
+			
+			#scroll2 .mui-search .mui-placeholder {
+				line-height: 8vh;
+			}
+			
+			.mui-content {
+				color: #B7B7B7;
+			}
+			
+			.mui-search.mui-active:before {
+				left: 6.6vw;
+			}
+			
+			.mui-search:before {
+				top: 9vw;
+			}
+			
+			#scroll2 .mui-card.g-complete {
+				margin-top: 0;
+				margin-bottom: 2vh;
+			}
+			
+			.btn_scan {
+				position: fixed;
+				top: 36vh;
+				z-index: 2;
+				right: 2vw;
+				display: block;
+			}
+			
+			.btn_scan img {
+				height: 12vw;
+				width: 12vw;
+			}

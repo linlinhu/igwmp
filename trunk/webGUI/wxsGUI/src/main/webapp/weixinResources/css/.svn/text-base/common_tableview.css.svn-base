@@ -1,0 +1,35 @@
+.mui-table-view-cell.mui-active {
+	background: #1c1c1c;
+}
+
+.mui-table-view .mui-table-view-cell {
+	border-bottom: 1px solid #333;
+	margin-right: 18px;
+	margin-left: 18px;
+	padding-left: 0;
+	padding-right: 0;
+}
+
+.mui-table-view {
+	padding-left: 0;
+	padding-right: 0;
+}
+
+.mui-table-view-cell.last {
+	border: 0;
+}
+
+.mui-table-view-cell:after {
+	height: 0;
+}
+
+.mui-table-view:before {
+	top: 0;
+	height: 1px;
+	background: #333;
+}
+
+.mui-table-view:after {
+	height: 1px;
+	background: #333;
+}

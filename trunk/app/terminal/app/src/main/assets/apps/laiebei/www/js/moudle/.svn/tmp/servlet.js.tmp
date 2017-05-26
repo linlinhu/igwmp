@@ -1,0 +1,76 @@
+/***************页面跳转 控制*******************/
+
+/*******
+ * 跳转页面
+ * @param {Object} pageName 页面名称 
+ */
+function toPage(pageName){
+	var content = $(".main");
+	for(var i=0;i<content.length;i++){
+		var cur = $(content[i]);
+		if(cur.attr("id")==pageName&&cur.hasClass("hide")){
+			cur.removeClass("hide")
+		}else{
+			if(!cur.hasClass("hide"))
+			cur.addClass("hide");
+		}
+	}
+}
+
+/****
+ * 返回主页
+ */
+function backToIndex(){
+	controlInit();
+	var content = $(".main");
+	for(var i=0;i<content.length;i++){
+		if(!$(content[i]).hasClass("hide"))
+		$(content[i]).addClass("hide")
+	}
+	$("#index-moudle").removeClass("hide");
+}
+
+/*****
+ * 打开二维码收银台
+ */
+function openSettlementPopup(){
+	$("#scanCounter-popUp").removeClass("hide");
+}
+/***
+ * 二维码支付成功，显示打酒
+ */
+function loadServiceResult(){
+	$("#scanCounter-popUp").addClass("hide");
+	toPage('service-result-moudle');
+}
+
+/*****
+ * 打酒成功，完成服务
+ */
+function completeService(){
+	$("#service-loading").addClass("hide");
+	$("#service-success").removeClass("hide");
+<<<<<<< .mine
+}
+
+/*****
+ * 显示代打酒列表
+ */
+function showServiceList(waiter){
+	toPage('service-lst-moudle');
+	getReplaces(waiter)
+	console.log('显示代打酒列表')
+}
+=======
+}
+
+/********
+ * 跳转至酒品详情页
+ * @param {Object} self
+ */
+function toWinDetail(self){
+	var winLstIndex = $(self).attr("win-lst-index");
+	loadWinDetail(globalWinLst[winLstIndex]);//加载酒品详情
+	toPage('win-detail-moudle');
+}
+>>>>>>> .r1072

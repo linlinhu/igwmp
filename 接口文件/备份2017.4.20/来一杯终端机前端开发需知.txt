@@ -1,0 +1,13 @@
+TeamViewer连接地址及密码：873 422 337/890317yds
+
+终端机前端代码目录：igwmp\trunk\app\terminal\app\src\main\assets\apps\laiebei\www
+
+js说明
+
+www/js/moudle/servlet.js js跳转交互代码
+www/js/moudle/dataLoading.js 后台数据加载核心
+
+html说明
+
+www/index.html 终端机页面代码
+www/index_test.html 后台数据调用测试代码

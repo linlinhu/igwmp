@@ -1,0 +1,27 @@
+{
+	"ident":{
+		"type":"0 心跳包 1通讯包",
+		"device":"机器识别码"
+	},
+	"handler":{
+		"time":"指令上传时间戳",
+		"type":"通讯类型  0获取session数据  1基本通讯",
+		"version":"版本号",
+		"sesscion":"服务器校验码  type为0时为空 基本通讯时作为校验码",
+		"bodyType":"text/json/html/xml 指示body的数据形式",
+		"bodyLenght":"指示body数据长度"
+	},
+	"body":{
+		"code":"返回类型  成功/失败类型",
+		"type":"通讯类型  机器绑定  酒列表 广告等",
+		"messages":[{
+				"messageId":"消息ID指示同种通讯类型下的不同类别",
+				"message":"具体消息实体"
+		}
+		],
+		"describe":"body信息描述"
+	},
+	"foot":{
+		"describe":""
+	}
+}

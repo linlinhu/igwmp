@@ -1,0 +1,349 @@
+.mui-control-content {
+				min-height: 44px;
+			}
+			.mui-control-content .mui-loading {
+				margin-top: 50px;
+			}
+			
+			.mui-card {
+				border-top: #282828 solid 1px;
+				border-bottom: #282828 solid 1px;
+				margin: 0;
+				margin-bottom: 2vh;
+				background: #1C1C1C;
+			}
+			
+			.mui-card-header.mui-card-media .mui-media-body {
+				margin-left: 0;
+				color: #999;
+				font-size: 1rem;
+			}
+			
+			.mui-card-header.mui-card-media {
+				padding: 15px;
+			}
+			/*增加一层用来阻止上面tabbar切换*/
+			.g-grid_tabbar {
+				background: #000;
+				height: 40px;
+				width: 100vw;
+				opacity: .4;
+				position: fixed;
+				top: 0;
+				display: none;
+				z-index: 999;
+			}
+			
+			.mui-segmented-control {
+				
+				position: fixed;
+				top: 0;
+				border-color: #C9933D;
+				z-index: 900;
+			}
+			
+			.mui-segmented-control .mui-control-item {
+				color: #EADAA7;
+				border-color: #C9933D;
+			}
+			
+			.mui-segmented-control .mui-control-item.mui-active {
+				color: #D5C283;
+				background: #C9933D;
+			}
+			/*.mui-card-content-inner img {
+				width: 20vw;
+			}*/
+			
+			.mui-slider .mui-slider-group .mui-slider-item img {
+				width: 26vw;
+				padding-left: 4vw;
+				margin-right: 4vw;
+				margin-top: 2vh;
+			}
+			
+			.m-wine_info {
+				margin-top: 2vh;
+				width: 58vw;
+				border-bottom: 1px solid #626262;
+			}
+			
+			.u-wine_name {
+				font-size: 1rem;
+				color: #bbb;
+			}
+			
+			.u-wine_name span {
+				font-size: .6rem;
+				padding-left: 2vw;
+				color: #666;
+			}
+			
+			.u-wine_code {
+				color: #999;
+			}
+			
+			.u-wine_code .u-color_yellow {
+				color: #D09434;
+			}
+			
+			.u-wine_price {
+				color: #999;
+			}
+			
+			.u-wine_price .u-color_yellow {
+				color: #D09434;
+			}
+			
+			.u-wine_price_right {
+				padding-left: 10vw;
+			}
+			
+			.m-get_wine_code {
+				text-align: center;
+				margin-top: 2vh;
+				margin-bottom: 2vh;
+			}
+			
+			.m-get_wine_code button {
+				color: #DFDBD5;
+				width: 40vw;
+				background: #D09434;
+				border-color: #D09434;
+			}
+			/*弹出框*/
+			
+			.g-grid_window {
+				/*display: none;*/
+				width: 90vw;
+				height: 80vh;
+				margin-left: 5vw;
+				z-index: 10;
+				position: fixed;
+				top: 15vh;
+				/*background: yellowgreen;*/
+			}
+			
+			.g-grid_window .mui-card-content-inner img {
+				margin-left: 4vw;
+			}
+			
+			.u-wine_info {
+				color: #999;
+			}
+			
+			.g-grid_window .mui-card-content-inner .u-wine_info_middle {
+				margin-top: 2vh;
+				margin-bottom: 0.6vh;
+			}
+			
+			.g-grid {
+				z-index: 8;
+				position: fixed;
+				width: 100vw;
+				height: 100vh;
+				top: 0;
+				left: 0;
+				background: #161616;
+				/*display: none;*/
+			}
+			
+			.m-grid_wine_info {
+				margin-top: 4vh;
+				padding-left: 4vw;
+				margin-bottom: 2vh;
+			}
+			
+			.m-underline {
+				border-bottom: 1px solid #282828;
+			}
+			
+			.mui-card-footer:before,
+			.mui-card-header:after {
+				height: 1px;
+				-webkit-transform: scaleY(1);
+				transform: scaleY(1);
+				background-color: #282828;
+			}
+			
+			.m-underline img {
+				margin-top: 2vh;
+				width: 24vw;
+			}
+			
+			.mui-card-content-inner {
+				padding: 0;
+				margin: 0;
+			}
+			
+			.mui-table-view-cell> a:not(.mui-btn).mui-active {
+				background: #1c1c1c;
+			}
+			
+			.mui-table-view-cell.mui-collapse.mui-active {
+				margin-top: 0;
+			}
+			
+			.mui-table-view-cell>a:not(.mui-btn) {
+				margin: -1vh -4vw;
+			}
+			
+			.mui-table-view-cell.mui-active {
+				background: #1C1C1C;
+			}
+			
+			.mui-collapse a {
+				background: #1C1C1C;
+			}
+			
+			.mui-table-view-cell.mui-collapse .mui-collapse-content {
+				background: #1c1c1c;
+			}
+			
+			.mui-collapse-content .mui-input-group {
+				background: #1c1c1c;
+				margin: 0;
+				padding: 0;
+			}
+			
+			.m-wait_take_wine_info {
+				padding: 0;
+				margin: 0;
+				border-bottom: 1px solid #282828;
+			}
+			
+			.m-wait_take_wine_info p {
+				padding-top: 0.5vh;
+				color: #666;
+			}
+			
+			.m-wait_take_wine_info p.u-last_info {
+				padding-bottom: 1vh;
+			}
+			
+			.m-btn_wait_take_wine {
+				border-bottom: 1px solid #282828;
+				font-size: 1rem;
+			}
+			
+			.mui-card-content-inner a.m-btn_wait_take_wine {
+				color: #999;
+			}
+			
+			.g-wine_question {
+				text-align: center;
+				height: 10vh;
+				margin-top: 6vh;
+				color: #666;
+			}
+			
+			#grid_window_wait .g-wine_question {
+				text-align: center;
+				height: 16vh;
+				margin-top: 6vh;
+				color: #666;
+				position: relative;
+			}
+			
+			.g-wine_question span {
+				padding-left: 2vw;
+				color: #C9933D;
+			}
+			
+			.g-present_wine {
+				width: 90vw;
+				/*position: fixed;
+				bottom: 5vh;*/
+				position: absolute;
+				bottom: 0;
+				left: 0;
+				color: #fff;
+				background: #C9933D;
+				border-color: #C9933D;
+				border-radius: 0;
+			}
+			
+			.mui-loading .g-complete {
+				background: #000;
+				margin-top: -6vh;
+			}
+			
+			.mui-loading .g-complete .g-conplete_info img {
+				width: 32vw;
+			}
+			
+			.mui-loading .g-complete .m-total {
+				font-size: 0.8rem;
+			}
+			
+			.u-num_total {
+				color: #C9933D;
+			}
+			
+			.m-complete_info {
+				width: 60vw;
+				margin-top: 6vh;
+			}
+			
+			.u-wine_complete {
+				margin-bottom: 0;
+				margin-top: 2vh;
+				color: #999;
+			}
+			
+			#scroll2 .mui-card {
+				border: 0;
+				background: #000;
+			}
+			
+			.mui-card-content-inner .g-conplete_info {
+				display: block;
+				padding-bottom: 2vh;
+				margin-bottom: 1vh;
+				background: #1C1C1C;
+			}
+			
+			#grid_window_wait {
+				display: none;
+			}
+			
+			#grid_window_complete {
+				display: none;
+			}
+			
+			#grid_window_wait a img {
+				width: 6vw;
+			}
+			
+			#grid_window_complete a img {
+				width: 6vw;
+			}
+			
+			#grid {
+				display: none;
+			}
+			
+			#scroll2 {
+				/*height: 550px;*/
+			}
+			
+			#scroll2 .mui-card-header {
+				background: #1C1C1C;
+			}
+			
+			#scroll2 .mui-card-header:after {
+				height: 0;
+			}
+			
+			#scroll2 .g-conplete_info {
+				border-bottom: 1px solid #666;
+				border-top: 1px solid #666;
+			}
+			.mui-scroll-wrapper {
+				position: absolute;
+				top: 44px;
+				/*height: 550px;*/
+			}
+			#form {
+				display: none;
+			}
